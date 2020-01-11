@@ -12,19 +12,19 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v3.8.6">
-  <title>Signin Template · Bootstrap</title>
+  <title>PaymentApplication</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/sign-in/">
 
   <!-- Custom styles for this template -->
-  <link href="main.css" rel="stylesheet">
+  <link href="css/sign-in.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
 
 <form action="/pay" method="post" class="form-signin">
   <h1 class="h3 mb-3 font-weight-normal">Zaloguj się</h1>
-  <label for="inputEmail" class="sr-only">Login</label>
-  <input id="login" name="login" type="text" class="form-control" placeholder="Login" required autofocus>
+  <label for="inputEmail" class="sr-only">email</label>
+  <input id="email" name="email" type="text" class="form-control" placeholder="email" required autofocus>
   <label for="inputPassword" class="sr-only">Hasło</label>
   <input id="password" name="password" type="password"  class="form-control" placeholder="Hasło" required>
 

@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,8 +25,8 @@ public class User {
   @Column(name = "surname")
   private String surname;
 
-  @Column(name = "login")
-  private String login;
+  @Column(name = "email")
+  private String email;
 
   @Column(name = "password")
   private String password;
@@ -60,12 +58,12 @@ public class User {
     this.surname = surname;
   }
 
-  public String getLogin() {
-    return login;
+  public String getEmail() {
+    return email;
   }
 
-  public void setLogin(String login) {
-    this.login = login;
+  public void setEmail(String login) {
+    this.email = login;
   }
 
   public String getPassword() {

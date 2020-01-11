@@ -15,8 +15,8 @@ public class UserService {
   @Autowired
   private MapUserToDto mapUserToDto;
 
-  public UserDto findUserByLogin(String login){
-    return mapUserToDto.userToDto(userRepository.findByLogin(login));
+  public UserDto findUserByEmail(String email){
+    return mapUserToDto.userToDto(userRepository.findByEmail(email));
   }
 
 }
