@@ -22,14 +22,14 @@
       <h3 class="masthead-brand">Płatności On-line</h3>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="">Strona główna</a>
-        <a class="nav-link" href="#">Uzytkownicy</a>
         <a class="nav-link" href="#">Płatności</a>
+        <a class="nav-link" href="#">Konto</a>
       </nav>
     </div>
   </header>
 
   <main role="main" class="inner cover">
-    <h1 class="cover-heading">Witaj Mikołaj</h1>
+    <h1 class="cover-heading">Witaj</h1>
 
   </main>
 

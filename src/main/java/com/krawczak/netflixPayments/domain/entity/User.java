@@ -1,18 +1,26 @@
-package com.krawczak.netflixPayments.entity;
+package com.krawczak.netflixPayments.domain.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,14 +33,26 @@ public class User {
   @Column(name = "surname")
   private String surname;
 
-  @Column(name = "email")
+  @NotEmpty
+  @Column(name = "email", nullable = false, unique = true)
   private String email;
 
+  @NotEmpty
   @Column(name = "password")
   private String password;
 
+  @Column(name = "active")
+  private int active;
+
+  @ManyToOne
+  @JoinColumn(name = "role_id")
+  private Role role;
+
   @OneToMany(mappedBy = "user")
   List<Payment> payments = new ArrayList<>();
+
+  public User() {
+  }
 
   public Long getId() {
     return id;
@@ -80,5 +100,21 @@ public class User {
 
   public void setPayments(List<Payment> payments) {
     this.payments = payments;
+  }
+
+  public int getActive() {
+    return active;
+  }
+
+  public void setActive(int active) {
+    this.active = active;
+  }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
   }
 }

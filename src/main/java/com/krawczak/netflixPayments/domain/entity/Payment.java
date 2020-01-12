@@ -1,4 +1,4 @@
-package com.krawczak.netflixPayments.entity;
+package com.krawczak.netflixPayments.domain.entity;
 
 import java.util.Date;
 import javax.persistence.Column;

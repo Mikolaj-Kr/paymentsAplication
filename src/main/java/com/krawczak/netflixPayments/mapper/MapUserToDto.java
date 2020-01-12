@@ -1,7 +1,7 @@
 package com.krawczak.netflixPayments.mapper;
 
-import com.krawczak.netflixPayments.dto.UserDto;
-import com.krawczak.netflixPayments.entity.User;
+import com.krawczak.netflixPayments.domain.dto.UserDto;
+import com.krawczak.netflixPayments.domain.entity.User;
 import org.springframework.stereotype.Service;
 
 @Service

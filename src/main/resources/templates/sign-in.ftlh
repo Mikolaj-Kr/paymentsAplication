@@ -24,7 +24,7 @@
 <form action="/pay" method="post" class="form-signin">
   <h1 class="h3 mb-3 font-weight-normal">Zaloguj się</h1>
   <label for="inputEmail" class="sr-only">email</label>
-  <input id="email" name="email" type="text" class="form-control" placeholder="email" required autofocus>
+  <input id="username" name="username" type="text" class="form-control" placeholder="email" required autofocus>
   <label for="inputPassword" class="sr-only">Hasło</label>
   <input id="password" name="password" type="password"  class="form-control" placeholder="Hasło" required>
 

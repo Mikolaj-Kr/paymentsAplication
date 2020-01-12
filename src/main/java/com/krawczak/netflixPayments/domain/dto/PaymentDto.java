@@ -1,4 +1,4 @@
-package com.krawczak.netflixPayments.dto;
+package com.krawczak.netflixPayments.domain.dto;
 
 import java.util.Date;
 

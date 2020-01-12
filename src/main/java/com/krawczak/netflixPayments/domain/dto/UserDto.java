@@ -1,7 +1,4 @@
-package com.krawczak.netflixPayments.dto;
-
-import com.krawczak.netflixPayments.entity.User;
-import java.util.List;
+package com.krawczak.netflixPayments.domain.dto;
 
 public class UserDto {
 
