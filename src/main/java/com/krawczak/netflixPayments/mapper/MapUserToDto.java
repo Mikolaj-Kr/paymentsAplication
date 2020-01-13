@@ -12,8 +12,7 @@ public class MapUserToDto {
   public UserDto userToDto(User user){
     UserDto userDto = new UserDto();
 
-    userDto.setId(user.getId());
-    userDto.setLogin(user.getEmail());
+    userDto.setLogin(user.getUsername());
     userDto.setName(user.getName());
     userDto.setSurname(user.getSurname());
     userDto.setPassword(user.getPassword());

@@ -28,7 +28,7 @@
     </div>
   </header>
 
-  <main role="main" class="inner cover">
+  <main authorities="main" class="inner cover">
     <h1 class="cover-heading">Witaj</h1>
 
   </main>

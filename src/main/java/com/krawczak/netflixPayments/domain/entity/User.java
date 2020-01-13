@@ -2,13 +2,9 @@ package com.krawczak.netflixPayments.domain.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,15 +13,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "user_id")
-  private Long id;
+  @NotEmpty
+  @UniqueElements
+  @Column(name = "username", nullable = false, unique = true)
+  private String username;
 
   @Column(name = "name")
   private String name;
@@ -34,32 +32,21 @@ public class User implements Serializable {
   private String surname;
 
   @NotEmpty
-  @Column(name = "email", nullable = false, unique = true)
-  private String email;
-
-  @NotEmpty
   @Column(name = "password")
   private String password;
 
   @Column(name = "active")
   private int active;
 
-  @ManyToOne
-  @JoinColumn(name = "role_id")
-  private Role role;
+
+  @OneToMany(mappedBy = "user")
+  List<Authorities> authorities = new ArrayList<>();
+
 
   @OneToMany(mappedBy = "user")
   List<Payment> payments = new ArrayList<>();
 
   public User() {
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public String getName() {
@@ -78,12 +65,12 @@ public class User implements Serializable {
     this.surname = surname;
   }
 
-  public String getEmail() {
-    return email;
+  public String getUsername() {
+    return username;
   }
 
-  public void setEmail(String login) {
-    this.email = login;
+  public void setUsername(String login) {
+    this.username = login;
   }
 
   public String getPassword() {
@@ -110,11 +97,12 @@ public class User implements Serializable {
     this.active = active;
   }
 
-  public Role getRole() {
-    return role;
+  public List<Authorities> getAuthorities() {
+    return authorities;
   }
 
-  public void setRole(Role role) {
-    this.role = role;
+  public void setAuthorities(
+      List<Authorities> authorities) {
+    this.authorities = authorities;
   }
 }

@@ -1,11 +1,15 @@
 package com.krawczak.netflixPayments.configuration;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import java.beans.PropertyVetoException;
 import javax.sql.DataSource;
 import org.hibernate.dialect.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,37 +22,22 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
+@PropertySource("classpath:application.properties")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-  @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Autowired
   private DataSource dataSource;
 
-  @Value("${spring.queries.users-query")
-  private String usersQuery;
 
-  @Value("${spring.queries.roles-query")
-  private String rolesQuery;
 
-  @Bean
-  public UserDetailsService userDetailsService(){
-    UserDetails admin = User.withDefaultPasswordEncoder()
-        .username("mikolaj")
-        .password("mikolaj25")
-        .roles("ADMIN")
-        .build();
-    return new InMemoryUserDetailsManager();
-  }
+
+
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception{
     auth.jdbcAuthentication()
-        .usersByUsernameQuery(usersQuery)
-        .authoritiesByUsernameQuery(rolesQuery)
-        .dataSource(dataSource)
-        .passwordEncoder(bCryptPasswordEncoder);
+        .dataSource(dataSource);
+
   }
 
 
