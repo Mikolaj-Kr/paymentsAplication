@@ -26,7 +26,7 @@ public class Payment {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  User user;
+  Users users;
 
   public Long getId() {
     return id;
@@ -52,11 +52,11 @@ public class Payment {
     this.amountOfPayment = amountOfPayment;
   }
 
-  public User getUser() {
-    return user;
+  public Users getUsers() {
+    return users;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setUsers(Users users) {
+    this.users = users;
   }
 }

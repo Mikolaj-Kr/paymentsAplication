@@ -29,7 +29,7 @@
   </header>
 
   <main authorities="main" class="inner cover">
-    <h1 class="cover-heading">Witaj</h1>
+    <h1 class="cover-heading">Witaj ${username}</h1>
 
   </main>
 

@@ -5,19 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
+@Table(name = "users")
+public class Users implements Serializable {
 
   @Id
   @NotEmpty
@@ -35,18 +31,18 @@ public class User implements Serializable {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "active")
-  private int active;
+  @Column(name = "enabled")
+  private int enabled;
 
 
-  @OneToMany(mappedBy = "user")
+  @OneToMany(mappedBy = "users")
   List<Authorities> authorities = new ArrayList<>();
 
 
-  @OneToMany(mappedBy = "user")
+  @OneToMany(mappedBy = "users")
   List<Payment> payments = new ArrayList<>();
 
-  public User() {
+  public Users() {
   }
 
   public String getName() {
@@ -89,12 +85,12 @@ public class User implements Serializable {
     this.payments = payments;
   }
 
-  public int getActive() {
-    return active;
+  public int getEnabled() {
+    return enabled;
   }
 
-  public void setActive(int active) {
-    this.active = active;
+  public void setEnabled(int enabled) {
+    this.enabled = enabled;
   }
 
   public List<Authorities> getAuthorities() {
