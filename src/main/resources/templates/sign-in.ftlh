@@ -16,7 +16,7 @@
   <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/sign-in/">
 
   <!-- Custom styles for this template -->
-  <link href="css/sign-in.css" rel="stylesheet">
+  <link href="../static/css/form.css" rel="stylesheet">
 </head>
 
 <body class="text-center">

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MainSiteController {
+public class RegistrationController {
 
-  @RequestMapping("/pay-main")
-  public ModelAndView getMain(){
+  @RequestMapping("/pay-registration")
+  public ModelAndView getRegistration(){
     Map<String, Object> params = new HashMap<>();
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String username;
@@ -21,8 +21,9 @@ public class MainSiteController {
     } else {
       username = principal.toString();
     }
-    params.put("site", "main");
+    params.put("site", "registration");
     params.put("username", username);
-    return new  ModelAndView("main-site", params);
+    return new ModelAndView("registration-site", params);
   }
+
 }
