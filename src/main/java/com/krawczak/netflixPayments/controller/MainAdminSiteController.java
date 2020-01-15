@@ -13,9 +13,15 @@ public class MainAdminSiteController {
 
   @RequestMapping("/pay-main-admin")
   public ModelAndView getMainAdminSite() {
-    Object principal = SecurityContextHolder.getContext().getAuthentication();
     Map<String, Object> params = new HashMap<>();
-    String username = ((UserDetails)principal).getUsername();
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String username;
+    if (principal instanceof UserDetails) {
+      username = ((UserDetails)principal).getUsername();
+    } else {
+      username = principal.toString();
+    }
+    params.put("username",username);
     return new ModelAndView("main-site-admin", params);
   }
 
