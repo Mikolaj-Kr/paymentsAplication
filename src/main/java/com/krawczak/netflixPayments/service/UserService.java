@@ -14,9 +14,6 @@ public class UserService {
 
   private UserRepository userRepository;
   private MapUserToDto mapUserToDto;
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
 
   public UserDto findUserByUsername(String username){
     return mapUserToDto.userToDto(userRepository.findByUsername(username)) ;

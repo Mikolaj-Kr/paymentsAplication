@@ -1,4 +1,4 @@
-<form id="registrationForm" action="/pay-add-user" method="post" class="form-signin">
+<form id="registrationForm" action="/pay-registration" method="post" class="form-signin">
   <h1 class="h3 mb-3 font-weight-normal">Zarejestruj się</h1>
   <label for="name" class="sr-only">Imię</label>
   <input id="name" name="name" type="text" class="form-control" placeholder="Imie" required autofocus> <br>

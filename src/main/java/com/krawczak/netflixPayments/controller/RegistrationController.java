@@ -1,11 +1,11 @@
 package com.krawczak.netflixPayments.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.krawczak.netflixPayments.configuration.ModelAndViewConfig;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,24 +17,31 @@ import org.springframework.web.servlet.ModelAndView;
 public class RegistrationController {
 
   @RequestMapping("/pay-registration")
-  public ModelAndView getRegistration(){
-    Map<String, Object> params = new HashMap<>();
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    String username;
-    if (principal instanceof UserDetails) {
-      username = ((UserDetails)principal).getUsername();
-    } else {
-      username = principal.toString();
-    }
-    params.put("site", "registration");
-    params.put("username", username);
-    return new ModelAndView("main-site", params);
+  public ModelAndView getRegistration() {
+    return getModelAndView("registration");
   }
 
   @PostMapping("/pay-registration")
-  public ResponseEntity<String> addNewUser(){
-    return new ResponseEntity<>("hello", HttpStatus.OK);
+  public ResponseEntity<String> addNewUser(
+      @RequestParam(value = "name", required = true) String name,
+      @RequestParam(value = "surname", required = true) String surname,
+      @RequestParam(value = "username", required = true) String username,
+      @RequestParam(value = "password", required = true) String password,
+      HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+    response.sendRedirect("/pay-registration-success");
+
+    return new ResponseEntity<>(name, HttpStatus.OK);
   }
 
+  @GetMapping("/pay-registration-success")
+  public ModelAndView registrationSuccess() {
+    return getModelAndView("registrationSuccess");
+  }
+
+  private ModelAndView getModelAndView(String page) {
+    ModelAndViewConfig modelAndViewConfig = new ModelAndViewConfig();
+    return modelAndViewConfig.getModelAndView(page);
+  }
 
 }

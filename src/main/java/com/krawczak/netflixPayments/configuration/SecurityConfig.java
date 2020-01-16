@@ -1,5 +1,6 @@
 package com.krawczak.netflixPayments.configuration;
 
+import com.krawczak.netflixPayments.controller.RegistrationController;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-@PropertySource("classpath:application.properties")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
@@ -30,8 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-        .anyRequest().permitAll()
+    http.httpBasic().and().authorizeRequests()
+        .antMatchers("/pay-main").permitAll()
+        .antMatchers("/pay-main-admin").hasAuthority("ADMIN")
+        .antMatchers("/pay-registration").permitAll()
+        .antMatchers(HttpMethod.POST, "/pay-registration").permitAll()
         .and()
         .formLogin()
         .permitAll()
@@ -40,6 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .logout()
         .permitAll()
         .logoutUrl("/logout")
-        .logoutSuccessUrl("/pay-main");
+        .logoutSuccessUrl("/pay-main")
+        .and()
+        .csrf()
+        .disable();
   }
 }
