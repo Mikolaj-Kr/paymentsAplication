@@ -31,9 +31,9 @@ public class RegistrationController {
     return new ModelAndView("main-site", params);
   }
 
-  @PostMapping("/pay-add-user")
-  public ResponseEntity<String> addNewUser(@RequestParam (value = "name", required = true) String name, @RequestParam(value = "surname", required = true) String surname, @RequestParam(value = "username", required = true) String username, @RequestParam(value = "password", required = true) String password){
-    return new ResponseEntity<>(username, HttpStatus.OK);
+  @PostMapping("/pay-registration")
+  public ResponseEntity<String> addNewUser(){
+    return new ResponseEntity<>("hello", HttpStatus.OK);
   }
 
 
