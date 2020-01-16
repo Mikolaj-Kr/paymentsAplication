@@ -39,10 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .defaultSuccessUrl("/pay-main")
         .and()
         .logout()
+        .permitAll()
         .logoutUrl("/logout")
         .logoutSuccessUrl("/pay-main");
-    http.authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/pay-add-user")
-        .permitAll();
   }
 }
