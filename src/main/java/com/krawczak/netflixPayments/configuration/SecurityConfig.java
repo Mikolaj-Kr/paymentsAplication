@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.POST, "/pay-registration").permitAll()
         .and()
         .formLogin()
+        .loginPage("/login")
         .permitAll()
         .defaultSuccessUrl("/pay-main")
         .and()

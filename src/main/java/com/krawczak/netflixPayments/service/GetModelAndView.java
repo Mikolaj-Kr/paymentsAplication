@@ -1,4 +1,4 @@
-package com.krawczak.netflixPayments.configuration;
+package com.krawczak.netflixPayments.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.servlet.ModelAndView;
 
-public class ModelAndViewConfig {
+public class GetModelAndView {
 
   public ModelAndView getModelAndView(String page) {
     Map<String, Object> params = new HashMap<>();

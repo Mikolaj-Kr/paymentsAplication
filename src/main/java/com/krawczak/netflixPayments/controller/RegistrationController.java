@@ -1,6 +1,6 @@
 package com.krawczak.netflixPayments.controller;
 
-import com.krawczak.netflixPayments.configuration.ModelAndViewConfig;
+import com.krawczak.netflixPayments.service.GetModelAndView;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,8 +40,8 @@ public class RegistrationController {
   }
 
   private ModelAndView getModelAndView(String page) {
-    ModelAndViewConfig modelAndViewConfig = new ModelAndViewConfig();
-    return modelAndViewConfig.getModelAndView(page);
+    GetModelAndView getModelAndView = new GetModelAndView();
+    return getModelAndView.getModelAndView(page);
   }
 
 }
