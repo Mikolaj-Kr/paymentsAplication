@@ -27,6 +27,9 @@ public class Users implements Serializable {
   @Column(name = "surname")
   private String surname;
 
+  @Column(name = "email")
+  private String email;
+
   @NotEmpty
   @Column(name = "password")
   private String password;
