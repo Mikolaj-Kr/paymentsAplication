@@ -104,4 +104,12 @@ public class Users implements Serializable {
       List<Authorities> authorities) {
     this.authorities = authorities;
   }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
 }

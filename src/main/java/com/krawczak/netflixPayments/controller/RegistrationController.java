@@ -1,7 +1,9 @@
 package com.krawczak.netflixPayments.controller;
 
 import com.krawczak.netflixPayments.configuration.PasswordEncoder;
+import com.krawczak.netflixPayments.domain.entity.Authorities;
 import com.krawczak.netflixPayments.domain.entity.Users;
+import com.krawczak.netflixPayments.service.AuthoritiesService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.UserService;
 import java.io.IOException;
@@ -29,6 +31,9 @@ public class RegistrationController {
 
   @Autowired
   UserService userService;
+
+  @Autowired
+  AuthoritiesService authoritiesService;
 
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -60,10 +65,23 @@ public class RegistrationController {
     }
 
     Users users = new Users();
+    Authorities authorities = new Authorities();
     users.setName(name);
     users.setSurname(surname);
     users.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(password));
     users.setUsername(username);
+    users.setPayments(null);
+    users.setEnabled(1);
+    users.setEmail(email);
+    authorities.setUsers(users);
+    authorities.setAuthority("User");
+
+    userService.saveUser(users);
+    authoritiesService.saveAuthorities(authorities);
+
+    logger.info("User " + username + "Added to DB");
+
+
 
 
     response.sendRedirect("/pay-registration-success");
