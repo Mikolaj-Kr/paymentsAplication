@@ -17,8 +17,7 @@ public class Users implements Serializable {
 
   @Id
   @NotEmpty
-  @UniqueElements
-  @Column(name = "username", nullable = false, unique = true)
+  @Column(name = "username", nullable = false)
   private String username;
 
   @Column(name = "name")

@@ -17,12 +17,11 @@ public class MainAdminSiteController {
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String username;
     if (principal instanceof UserDetails) {
-      username = ((UserDetails)principal).getUsername();
+      username = ((UserDetails) principal).getUsername();
     } else {
       username = principal.toString();
     }
-    params.put("username",username);
+    params.put("username", username);
     return new ModelAndView("main-site-admin", params);
   }
-
 }

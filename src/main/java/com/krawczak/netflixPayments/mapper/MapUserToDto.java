@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 public class MapUserToDto {
 
 
-
-  public UserDto userToDto(Users users){
+  public UserDto userToDto(Users users) {
     UserDto userDto = new UserDto();
 
     userDto.setLogin(users.getUsername());
@@ -19,5 +18,4 @@ public class MapUserToDto {
 
     return userDto;
   }
-
 }

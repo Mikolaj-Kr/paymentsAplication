@@ -37,5 +37,4 @@ public class Authorities {
   public Users getUsers() {
     return users;
   }
-
 }

@@ -1,26 +1,21 @@
 package com.krawczak.netflixPayments.service;
 
-import com.krawczak.netflixPayments.domain.dto.UserDto;
 import com.krawczak.netflixPayments.domain.entity.Users;
-import com.krawczak.netflixPayments.mapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-  private UserRepository userRepository;
-  private MapUserToDto mapUserToDto;
+  @Autowired
+  UserRepository userRepository;
 
-  public UserDto findUserByUsername(String username){
-    return mapUserToDto.userToDto(userRepository.findAllByUsernameContains(username)) ;
+  public Users findUserByUsername(String username) {
+    return userRepository.findUsersByUsername(username);
   }
 
-  public void saveUser(Users users){
+  public void saveUser(Users users) {
     userRepository.save(users);
   }
-
-
-
-
 }

@@ -5,7 +5,8 @@
         <#if username = "anonymousUser">
           <a class="nav-link <#if site="main">active</#if>" href="/pay-main">Strona główna</a>
           <a class="nav-link" href="/login">Zaloguj się</a>
-          <a class="nav-link <#if site="registration">active</#if> " href="/pay-registration">Zarejestruj się</a>
+          <a class="nav-link <#if site="registration">active</#if> " href="/pay-registration">Zarejestruj
+            się</a>
         <#else >
           <a class="nav-link <#if site="main">active</#if>" href="">Strona główna</a>
           <a class="nav-link" href="#">Płatności</a>

@@ -5,7 +5,7 @@
   <label for="surname" class="sr-only">Nazwisko</label>
   <input id="surname" name="surname" type="text" class="form-control" placeholder="Nazwisko" required autofocus> <br>
   <label for="username" class="sr-only">Nazwa użytkownika</label>
-  <label for="email" class="sr-only">email</label>a
+  <label for="email" class="sr-only">email</label>
   <input id="email" name="email" type="text" class="form-control" placeholder="email" required autofocus><br>
   <input id="username" name="username" type="text" class="form-control" placeholder="Nazwa użytkownika" required autofocus><br>
   <label for="password" class="sr-only">Hasło</label>

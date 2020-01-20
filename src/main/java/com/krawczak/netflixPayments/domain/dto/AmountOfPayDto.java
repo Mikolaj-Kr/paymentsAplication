@@ -1,6 +1,7 @@
 package com.krawczak.netflixPayments.domain.dto;
 
 public class AmountOfPayDto {
+
   private Long id;
   private Long amountOfPayment;
 
