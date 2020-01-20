@@ -2,11 +2,9 @@ package com.krawczak.netflixPayments.controller;
 
 import com.krawczak.netflixPayments.configuration.PasswordEncoder;
 import com.krawczak.netflixPayments.domain.entity.Authorities;
-import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.service.AuthoritiesService;
 import com.krawczak.netflixPayments.service.UserService;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +27,7 @@ public class CreateAdminUser {
   PasswordEncoder passwordEncoder;
 
   @RequestMapping("pay-add-admin")
-  public ModelAndView getAdmin(){
+  public ModelAndView getAdmin() {
     Users users = new Users();
     users.setEnabled(1);
     users.setName("mikolaj");
@@ -39,12 +37,9 @@ public class CreateAdminUser {
     users.setSurname("krawczak");
     users.setUsername("mikolaj");
 
-
     Authorities authorities = new Authorities();
     authorities.setAuthority("ADMIN");
     authorities.setUsers(users);
-
-
 
     List<Authorities> authoritiesList = new ArrayList<>();
     authoritiesList.add(authorities);
@@ -56,8 +51,6 @@ public class CreateAdminUser {
     authoritiesService.saveAuthorities(authorities);
 
     Map<String, Object> params = new HashMap<>();
-    return new ModelAndView("main-site",params);
+    return new ModelAndView("main-site", params);
   }
-
-
 }

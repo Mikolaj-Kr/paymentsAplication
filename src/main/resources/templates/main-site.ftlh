@@ -8,7 +8,7 @@
 
     <#include "fragments/sites/${site}.ftlh">
 
-  <#include "fragments/solidElements/footer.ftlh">
+    <#include "fragments/solidElements/footer.ftlh">
 </div>
 <#include "fragments/solidElements/scriptImport.ftlh">
 

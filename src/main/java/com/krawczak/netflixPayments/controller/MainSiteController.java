@@ -14,11 +14,11 @@ public class MainSiteController {
   UserService userService;
 
   @RequestMapping("/pay-main")
-  public ModelAndView getMain(){
+  public ModelAndView getMain() {
     return getModelAndView("main");
   }
 
-  private ModelAndView getModelAndView(String page){
+  private ModelAndView getModelAndView(String page) {
     GetModelAndView getModelAndView = new GetModelAndView();
     return getModelAndView.getModelAndView(page);
   }

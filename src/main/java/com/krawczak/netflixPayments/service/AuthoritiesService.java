@@ -11,7 +11,7 @@ public class AuthoritiesService {
   @Autowired
   AuthoritiesRepository authoritiesRepository;
 
-  public void saveAuthorities(Authorities authorities){
+  public void saveAuthorities(Authorities authorities) {
     authoritiesRepository.save(authorities);
   }
 

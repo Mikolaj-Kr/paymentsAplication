@@ -17,8 +17,7 @@ public class Users implements Serializable {
 
   @Id
   @NotEmpty
-  @UniqueElements
-  @Column(name = "username", nullable = false, unique = true)
+  @Column(name = "username", nullable = false)
   private String username;
 
   @Column(name = "name")
@@ -26,6 +25,9 @@ public class Users implements Serializable {
 
   @Column(name = "surname")
   private String surname;
+
+  @Column(name = "email")
+  private String email;
 
   @NotEmpty
   @Column(name = "password")
@@ -100,5 +102,13 @@ public class Users implements Serializable {
   public void setAuthorities(
       List<Authorities> authorities) {
     this.authorities = authorities;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 }
