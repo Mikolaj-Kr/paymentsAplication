@@ -33,6 +33,9 @@ public class RegistrationController {
   @Autowired
   AuthoritiesService authoritiesService;
 
+  @Autowired
+  GetModelAndView getModelAndView;
+
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -99,7 +102,6 @@ public class RegistrationController {
   }
 
   private ModelAndView getModelAndView(String page) {
-    GetModelAndView getModelAndView = new GetModelAndView();
     return getModelAndView.getModelAndView(page);
   }
 }

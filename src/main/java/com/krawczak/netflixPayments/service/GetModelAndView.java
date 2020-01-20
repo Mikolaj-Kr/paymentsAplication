@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+@Service
 public class GetModelAndView {
 
   public ModelAndView getModelAndView(String page) {
