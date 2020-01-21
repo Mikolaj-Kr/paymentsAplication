@@ -1,5 +1,6 @@
 package com.krawczak.netflixPayments.domain.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ public class Payment {
   private Long id;
 
   @Column(name = "date_of_payment")
-  private Date dateOfPayment;
+  private LocalDate dateOfPayment;
 
   @Column(name = "amount_of_payment")
   private Long amountOfPayment;
@@ -36,11 +37,11 @@ public class Payment {
     this.id = id;
   }
 
-  public Date getDateOfPayment() {
+  public LocalDate getDateOfPayment() {
     return dateOfPayment;
   }
 
-  public void setDateOfPayment(Date dateOfPayment) {
+  public void setDateOfPayment(LocalDate dateOfPayment) {
     this.dateOfPayment = dateOfPayment;
   }
 

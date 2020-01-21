@@ -8,8 +8,8 @@
           <a class="nav-link <#if site="registration">active</#if> " href="/pay-registration">Zarejestruj
             się</a>
         <#else >
-          <a class="nav-link <#if site="main">active</#if>" href="">Strona główna</a>
-          <a class="nav-link" href="#">Płatności</a>
+          <a class="nav-link <#if site="main">active</#if>" href="/pay-main">Strona główna</a>
+          <a class="nav-link <#if site="payments">active</#if>" href="/pay-payments">Płatności</a>
           <a class="nav-link" href="#">Konto</a>
           <a class="nav-link" href="/logout">Wyloguj</a>
         </#if>

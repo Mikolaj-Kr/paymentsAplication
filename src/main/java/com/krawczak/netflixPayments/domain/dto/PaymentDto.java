@@ -1,11 +1,12 @@
 package com.krawczak.netflixPayments.domain.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PaymentDto {
 
   private Long id;
-  private Date dateOfPayment;
+  private LocalDate dateOfPayment;
   private Long amountOfPayment;
   private UserDto userDto;
 
@@ -17,11 +18,11 @@ public class PaymentDto {
     this.id = id;
   }
 
-  public Date getDateOfPayment() {
+  public LocalDate getDateOfPayment() {
     return dateOfPayment;
   }
 
-  public void setDateOfPayment(Date dateOfPayment) {
+  public void setDateOfPayment(LocalDate dateOfPayment) {
     this.dateOfPayment = dateOfPayment;
   }
 
