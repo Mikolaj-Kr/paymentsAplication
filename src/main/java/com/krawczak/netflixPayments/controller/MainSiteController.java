@@ -2,6 +2,7 @@ package com.krawczak.netflixPayments.controller;
 
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.UserService;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +19,10 @@ public class MainSiteController {
 
   @RequestMapping("/pay-main")
   public ModelAndView getMain() {
-    return getModelAndView("main");
+    return new ModelAndView("main-site", getModelAndView("main"));
   }
 
-  private ModelAndView getModelAndView(String page) {
-    return getModelAndView.getModelAndView(page);
+  private Map<String, Object> getModelAndView(String page) {
+    return getModelAndView.getModelAndViewParams(page);
   }
 }

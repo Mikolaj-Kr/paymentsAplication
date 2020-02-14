@@ -1,17 +1,12 @@
 package com.krawczak.netflixPayments.controller;
 
-import com.krawczak.netflixPayments.domain.dto.PaymentDto;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Year;
-import java.util.Date;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -27,11 +22,11 @@ public class PaymentsController {
   public ModelAndView getPaymentsController(){
     LocalDate dateNow = LocalDate.now();
 //    PaymentDto lastPayment = paymentService.getLastPayment(dateNow);
-    return (ModelAndView) getModelAndView("payments").getModel().put("lastPayment", "ostatnia platnosc");
+    return new ModelAndView("main-site", getModelAndView("payments"));
   }
 
-  private ModelAndView getModelAndView(String page){
-    return getModelAndView.getModelAndView(page);
+  private Map<String, Object> getModelAndView(String page){
+    return getModelAndView.getModelAndViewParams(page);
   }
 
 }

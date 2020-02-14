@@ -7,6 +7,7 @@ import com.krawczak.netflixPayments.service.AuthoritiesService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.UserService;
 import java.io.IOException;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class RegistrationController {
 
   @RequestMapping("/pay-registration")
   public ModelAndView getRegistration() {
-    return getModelAndView("registration");
+    return new ModelAndView("main-site", getModelAndView("registration"));
   }
 
   @PostMapping("/pay-registration")
@@ -88,20 +89,20 @@ public class RegistrationController {
 
   @GetMapping("/pay-registration-success")
   public ModelAndView registrationSuccess() {
-    return getModelAndView("registrationSuccess");
+    return new ModelAndView("main-site", getModelAndView("registrationSuccess"));
   }
 
   @GetMapping("/pay-registration-wrong-password")
   public ModelAndView registrationWrongPassword() {
-    return getModelAndView("registrationPasswordNotEquals");
+    return new ModelAndView("main-site", getModelAndView("registrationPasswordNotEquals"));
   }
 
   @GetMapping("/pay-registration-wrong-username")
   public ModelAndView registrationWrongUsername() {
-    return getModelAndView("registrationUsernameAlreadyTaken");
+    return new ModelAndView("main-site", getModelAndView("registrationUsernameAlreadyTaken"));
   }
 
-  private ModelAndView getModelAndView(String page) {
-    return getModelAndView.getModelAndView(page);
+  private Map<String, Object> getModelAndView(String page) {
+    return getModelAndView.getModelAndViewParams(page);
   }
 }
