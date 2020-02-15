@@ -7,7 +7,7 @@
   </thead>
   <tbody>
   <tr>
-    <th scope="row"> Miesiąc </th>
+    <th scope="row"> ${month} </th>
     <td> Płatność </td>
   </tr>
   </tbody>
