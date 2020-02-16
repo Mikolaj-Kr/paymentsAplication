@@ -24,23 +24,22 @@ public class PaymentService {
   @Autowired
   GetMonth getMonth;
 
-  public Map<String, String> getPayments() {
-    List<PaymentDto> paymentsList  = getAllPayment();
+  public List<PaymentDto> getPayments() {
     LocalDate dateNow = LocalDate.now();
+    PaymentDto lastPayment  = mapPaymentToDto.paymentDto(paymentsRepository.getDistinctFirstByDateOfPaymentBefore(dateNow));
+    List<PaymentDto> paymentsList = new ArrayList<>();
+
     Map <String, String> payments = new HashMap<>();
-    if (paymentsList == null){
+    if (lastPayment == null){
+      PaymentDto paymentDto = new PaymentDto();
+      paymentDto.setAmountOfPayment(0L);
       int currentMonth = dateNow.getMonth().getValue();
       String currentMonthString = getMonth.getMonth(currentMonth);
-      String lastMonthString = getMonth.getMonth(currentMonth-1);
-      String penultimateMonthString = getMonth.getMonth(currentMonth-2);
-
       payments.put(currentMonthString, "nieopłacony");
-      payments.put(lastMonthString, "nieopłacony");
-      payments.put(penultimateMonthString, "nieopłacony");
-      }
+      } else {
+    }
 
-
-    return payments;
+    return paymentsList;
   }
 
   public List<PaymentDto> getAllPayment(){
