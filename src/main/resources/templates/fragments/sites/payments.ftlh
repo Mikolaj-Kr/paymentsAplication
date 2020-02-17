@@ -6,9 +6,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <th scope="row"> ${month} </th>
-    <td> Płatność </td>
-  </tr>
+<#list paymentsList>
+  <#items as payment>
+    <tr>
+      <th scope="row"> ${payment.month} </th>
+      <td> niezaplacone </td>
+    </tr>
+  </#items>
+</#list>
+
   </tbody>
 </table>

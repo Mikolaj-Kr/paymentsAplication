@@ -1,15 +1,21 @@
 package com.krawczak.netflixPayments.service;
 
+import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.krawczak.netflixPayments.domain.dto.PaymentDto;
+import com.krawczak.netflixPayments.domain.dto.PaymentsForUsersDto;
+import com.krawczak.netflixPayments.domain.dto.UserDto;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.mapper.MapPaymentToDto;
+import com.krawczak.netflixPayments.mapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.PaymentsRepository;
+import com.krawczak.netflixPayments.repositories.UserRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,21 +30,16 @@ public class PaymentService {
   @Autowired
   GetMonth getMonth;
 
-  public List<PaymentDto> getPayments() {
-    LocalDate dateNow = LocalDate.now();
-    PaymentDto lastPayment  = mapPaymentToDto.paymentDto(paymentsRepository.getDistinctFirstByDateOfPaymentBefore(dateNow));
+  @Autowired
+  UserRepository userRepository;
+
+  @Autowired
+  MapUserToDto mapUserToDto;
+
+  public List<PaymentDto> getUserPayments(String username) {
     List<PaymentDto> paymentsList = new ArrayList<>();
-
-    Map <String, String> payments = new HashMap<>();
-    if (lastPayment == null){
-      PaymentDto paymentDto = new PaymentDto();
-      paymentDto.setAmountOfPayment(0L);
-      int currentMonth = dateNow.getMonth().getValue();
-      String currentMonthString = getMonth.getMonth(currentMonth);
-      payments.put(currentMonthString, "nieopłacony");
-      } else {
-    }
-
+        paymentsRepository.findPaymentByUsers(userRepository.findUsersByUsername(username))
+        .forEach(payment -> paymentsList.add(mapPaymentToDto.paymentDto(payment)));
     return paymentsList;
   }
 
@@ -50,4 +51,14 @@ public class PaymentService {
 
     return paymentsDto;
   }
-}
+
+  public List<PaymentsForUsersDto> getPaymentsForUsers(String username) {
+    List<PaymentDto> userPayments = getUserPayments(username);
+    List<PaymentsForUsersDto> paymentsList = new ArrayList<>();
+    LocalDate date = LocalDate.now();
+    PaymentsForUsersDto paymentsForUsersDto = new PaymentsForUsersDto();
+    int numberOfMonths = 1;
+      return paymentsList;
+    }
+  }
+

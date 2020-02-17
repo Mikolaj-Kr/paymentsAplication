@@ -25,7 +25,7 @@ public class PaymentsController {
   @GetMapping("/pay-payments")
   public ModelAndView getPaymentsController(){
     Map<String, Object> params  = getModelAndView("payments");
-    params.put("paymentsList", paymentService.getPayments());
+    params.put("paymentsList", paymentService.getPaymentsForUsers(params.get("username").toString()));
 
     return new ModelAndView("main-site", params);
   }
