@@ -9,8 +9,8 @@
 <#list paymentsList>
   <#items as payment>
     <tr>
-      <th scope="row"> ${payment.month} </th>
-      <td> niezaplacone </td>
+      <th scope="row"> ${payment.monthOfPayment} </th>
+      <td> ${payment.isRegulated} </td>
     </tr>
   </#items>
 </#list>

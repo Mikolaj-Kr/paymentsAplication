@@ -8,6 +8,8 @@ public class PaymentDto {
   private Long id;
   private LocalDate dateOfPayment;
   private Long amountOfPayment;
+  private String isRegulated;
+  private String monthOfPayment;
   private UserDto userDto;
 
   public Long getId() {
@@ -32,6 +34,22 @@ public class PaymentDto {
 
   public void setAmountOfPayment(Long amountOfPayment) {
     this.amountOfPayment = amountOfPayment;
+  }
+
+  public String getIsRegulated() {
+    return isRegulated;
+  }
+
+  public void setIsRegulated(String isRegulated) {
+    this.isRegulated = isRegulated;
+  }
+
+  public String getMonthOfPayment() {
+    return monthOfPayment;
+  }
+
+  public void setMonthOfPayment(String monthOfPayment) {
+    this.monthOfPayment = monthOfPayment;
   }
 
   public UserDto getUserDto() {
