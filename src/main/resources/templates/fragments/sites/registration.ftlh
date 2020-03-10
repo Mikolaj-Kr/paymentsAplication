@@ -6,12 +6,9 @@
   <label for="surname" class="sr-only">Nazwisko</label>
   <input id="surname" name="surname" type="text" class="form-control" placeholder="Nazwisko"
          required autofocus> <br>
-  <label for="username" class="sr-only">Nazwa użytkownika(Potrzebna do logowania)</label>
+  <label for="username" class="sr-only">email</label>
   <input id="username" name="username" type="text" class="form-control"
-         placeholder="Nazwa użytkownika (Potrzebna do logowania)" required autofocus><br>
-  <label for="email" class="sr-only">email</label>
-  <input id="email" name="email" type="text" class="form-control" placeholder="email" required
-         autofocus><br>
+         placeholder="email" required autofocus><br>
   <label for="password" class="sr-only">Hasło</label>
   <input id="password" name="password" type="password" class="form-control" placeholder="Hasło"
          required><br>

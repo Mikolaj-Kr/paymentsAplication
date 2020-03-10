@@ -1,19 +1,25 @@
 <table class="table table-dark">
-  <thead>
-  <tr>
-    <th>Miesiąc</th>
-    <th>Płatność</th>
-  </tr>
-  </thead>
-  <tbody>
-<#list paymentsList>
-  <#items as payment>
+    <thead>
     <tr>
-      <th scope="row"> ${payment.monthOfPayment} </th>
-      <td> ${payment.isRegulated} </td>
+        <th>Miesiąc</th>
+        <th>Płatność</th>
     </tr>
-  </#items>
-</#list>
+    </thead>
+    <tbody>
+    <#list paymentsList>
+        <#items as payment>
 
-  </tbody>
+            <tr>
+                <th scope="row"> ${payment.monthOfPayment} </th>
+                <td>
+                    <form id="payment" action="/pay-pay" method="post">
+                        <input type="hidden" name="paymentId" value="${payment.id}">
+                       <#if !payment.regulated>  <button> Zapłać </button> </#if>
+                    </form>
+                </td>
+            </tr>
+        </#items>
+    </#list>
+
+    </tbody>
 </table>

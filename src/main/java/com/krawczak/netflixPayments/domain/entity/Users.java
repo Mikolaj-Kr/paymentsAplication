@@ -26,9 +26,6 @@ public class Users implements Serializable {
   @Column(name = "surname")
   private String surname;
 
-  @Column(name = "email")
-  private String email;
-
   @NotEmpty
   @Column(name = "password")
   private String password;
@@ -102,13 +99,5 @@ public class Users implements Serializable {
   public void setAuthorities(
       List<Authorities> authorities) {
     this.authorities = authorities;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 }

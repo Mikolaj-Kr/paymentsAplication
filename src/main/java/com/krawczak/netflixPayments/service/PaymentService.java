@@ -10,11 +10,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PaymentService {
+
+  Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   PaymentsRepository paymentsRepository;
@@ -39,19 +44,30 @@ public class PaymentService {
     return paymentsList;
   }
 
+  public Payment getPaymentByUserAndDate(String username, LocalDate dateOfPayment){
+    return paymentsRepository.findPaymentByUsersAndDateOfPayment(userRepository.findUsersByUsername(username), dateOfPayment);
+  }
+
   public List<PaymentDto> getAllPayment(){
     List <Payment> payments = paymentsRepository.findAll();
     List <PaymentDto> paymentsDto = new ArrayList<>();
-
     payments.forEach(payment -> paymentsDto.add(mapPaymentToDto.paymentDto(payment)));
-
-
     return paymentsDto;
   }
 
-  public void savePayment(Payment payment){
-    paymentsRepository.save(payment);
+  public Payment findPaymentById(Long id){
+    return paymentsRepository.findPaymentById(id);
+  }
+
+  public void newPayController(Long id){
+    Payment payment = findPaymentById(id);
+    payment.setAmountOfPayment(10L);
+    savePayment(payment);
+  }
+
+  public void savePayment(Payment payment){paymentsRepository.save(payment);
   };
+
 
 
   }

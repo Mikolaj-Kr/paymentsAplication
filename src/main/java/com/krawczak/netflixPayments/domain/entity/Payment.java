@@ -29,6 +29,16 @@ public class Payment {
   @JoinColumn(name = "user_id")
   Users users;
 
+  public Payment(Long id, LocalDate dateOfPayment, Long amountOfPayment, Users users) {
+    this.id =  id;
+    this.dateOfPayment = dateOfPayment;
+    this.amountOfPayment = amountOfPayment;
+    this.users = users;
+  }
+
+  public Payment() {
+  }
+
   public Long getId() {
     return id;
   }

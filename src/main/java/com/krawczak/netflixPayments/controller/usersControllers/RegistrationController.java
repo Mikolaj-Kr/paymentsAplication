@@ -1,4 +1,4 @@
-package com.krawczak.netflixPayments.controller;
+package com.krawczak.netflixPayments.controller.usersControllers;
 
 import com.krawczak.netflixPayments.configuration.PasswordEncoder;
 import com.krawczak.netflixPayments.domain.entity.Authorities;
@@ -53,19 +53,17 @@ public class RegistrationController {
 
   @PostMapping("/pay-registration")
   public ResponseEntity<String> addNewUser(
-      @RequestParam(value = "name", required = true) String name,
-      @RequestParam(value = "surname", required = true) String surname,
-      @RequestParam(value = "username", required = true) String username,
-      @RequestParam(value = "password", required = true) String password,
-      @RequestParam(value = "password2", required = true) String password2,
-      @RequestParam(value = "email", required = true) String email,
-      HttpServletResponse response, HttpServletRequest request) throws IOException {
+      @RequestParam(value = "name") String name,
+      @RequestParam(value = "surname") String surname,
+      @RequestParam(value = "username") String username,
+      @RequestParam(value = "password") String password,
+      @RequestParam(value = "password2") String password2,
+      HttpServletResponse response) throws IOException {
     if (!password.equals(password2)) {
       response.sendRedirect("/pay-registration-wrong-password");
       logger.info("Registration of user:" + name + " failed. passwords is not valid");
       return new ResponseEntity<>(name, HttpStatus.OK);
-    }
-    if (userService.findUserByUsername(username) != null) {
+    } else if (userService.findUserByUsername(username) != null) {
       response.sendRedirect("pay-registration-wrong-username");
       logger.info("Registration failed, username: " + username + " already taken");
       return new ResponseEntity<>(name, HttpStatus.OK);
@@ -81,7 +79,6 @@ public class RegistrationController {
     users.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(password));
     users.setUsername(username);
     users.setEnabled(1);
-    users.setEmail(email);
     authorities.setUsers(users);
     authorities.setAuthority("User");
     payment.setAmountOfPayment(0L);

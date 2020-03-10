@@ -1,4 +1,4 @@
-package com.krawczak.netflixPayments.controller;
+package com.krawczak.netflixPayments.controller.usersControllers;
 
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.UserService;

@@ -1,6 +1,8 @@
-package com.krawczak.netflixPayments.controller;
+package com.krawczak.netflixPayments.controller.adminContollers;
 
 import com.krawczak.netflixPayments.service.GetModelAndView;
+
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,16 +19,9 @@ public class MainAdminSiteController {
 
   @RequestMapping("/pay-main-admin")
   public ModelAndView getMainAdminSite() {
-    Map<String, Object> params = getParams("main-site-admin");
-    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    String username;
-    if (principal instanceof UserDetails) {
-      username = ((UserDetails) principal).getUsername();
-    } else {
-      username = principal.toString();
-    }
-    params.put("username", username);
-    return new ModelAndView("main-site-admin", params);
+   Map<String, Object> params = getParams("main-admin");
+
+     return new ModelAndView("main-site", params);
   }
 
   private Map<String, Object> getParams(String page){

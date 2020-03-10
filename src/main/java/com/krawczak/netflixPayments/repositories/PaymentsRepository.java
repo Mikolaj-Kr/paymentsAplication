@@ -14,4 +14,9 @@ public interface PaymentsRepository extends JpaRepository<Payment, Long> {
   List<Payment> findAll();
 
   List<Payment> findPaymentByUsers(Users users);
+
+  Payment findPaymentById(Long id);
+
+  Payment findPaymentByUsersAndDateOfPayment(Users users, LocalDate date);
+
   }

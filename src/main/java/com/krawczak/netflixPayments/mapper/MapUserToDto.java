@@ -11,10 +11,9 @@ public class MapUserToDto {
   public UserDto userToDto(Users users) {
     UserDto userDto = new UserDto();
 
-    userDto.setLogin(users.getUsername());
+    userDto.setUsername(users.getUsername());
     userDto.setName(users.getName());
     userDto.setSurname(users.getSurname());
-    userDto.setPassword(users.getPassword());
 
     return userDto;
   }

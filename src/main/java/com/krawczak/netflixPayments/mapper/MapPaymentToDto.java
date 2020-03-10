@@ -21,9 +21,9 @@ public class MapPaymentToDto {
     paymentDto.setAmountOfPayment(payment.getAmountOfPayment());
     paymentDto.setDateOfPayment(payment.getDateOfPayment());
     if(payment.getAmountOfPayment()>0){
-      paymentDto.setIsRegulated("Opłacone");
+      paymentDto.setRegulated(true);
     } else {
-      paymentDto.setIsRegulated("Nieopłacone");
+      paymentDto.setRegulated(false);
     }
     paymentDto.setMonthOfPayment(getMonth.getMonth(payment.getDateOfPayment().getMonth().getValue()));
     paymentDto.setUserDto(mapUserToDto.userToDto(payment.getUsers()));

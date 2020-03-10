@@ -2,18 +2,17 @@ package com.krawczak.netflixPayments.domain.dto;
 
 public class UserDto {
 
-  private Long id;
+  private String username;
   private String name;
   private String surname;
-  private String login;
-  private String password;
+  private String enabled;
 
-  public Long getId() {
-    return id;
+  public String getUsername() {
+    return username;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getName() {
@@ -32,19 +31,11 @@ public class UserDto {
     this.surname = surname;
   }
 
-  public String getLogin() {
-    return login;
+  public String getEnabled() {
+    return enabled;
   }
 
-  public void setLogin(String login) {
-    this.login = login;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
+  public void setEnabled(String enabled) {
+    this.enabled = enabled;
   }
 }

@@ -1,14 +1,13 @@
 package com.krawczak.netflixPayments.domain.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class PaymentDto {
 
   private Long id;
   private LocalDate dateOfPayment;
   private Long amountOfPayment;
-  private String isRegulated;
+  private boolean regulated;
   private String monthOfPayment;
   private UserDto userDto;
 
@@ -36,12 +35,16 @@ public class PaymentDto {
     this.amountOfPayment = amountOfPayment;
   }
 
-  public String getIsRegulated() {
-    return isRegulated;
+  public boolean getIsRegulated() {
+    return regulated;
   }
 
-  public void setIsRegulated(String isRegulated) {
-    this.isRegulated = isRegulated;
+  public boolean isRegulated() {
+    return regulated;
+  }
+
+  public void setRegulated(boolean regulated) {
+    this.regulated = regulated;
   }
 
   public String getMonthOfPayment() {
