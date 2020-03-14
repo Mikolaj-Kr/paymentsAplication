@@ -9,7 +9,7 @@ public class PaymentDto {
   private Long amountOfPayment;
   private boolean regulated;
   private String monthOfPayment;
-  private UserDto userDto;
+  private UsersDto usersDto;
 
   public Long getId() {
     return id;
@@ -55,11 +55,11 @@ public class PaymentDto {
     this.monthOfPayment = monthOfPayment;
   }
 
-  public UserDto getUserDto() {
-    return userDto;
+  public UsersDto getUsersDto() {
+    return usersDto;
   }
 
-  public void setUserDto(UserDto userDto) {
-    this.userDto = userDto;
+  public void setUsersDto(UsersDto usersDto) {
+    this.usersDto = usersDto;
   }
 }

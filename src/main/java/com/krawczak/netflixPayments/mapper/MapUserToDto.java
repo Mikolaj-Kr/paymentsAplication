@@ -1,6 +1,6 @@
 package com.krawczak.netflixPayments.mapper;
 
-import com.krawczak.netflixPayments.domain.dto.UserDto;
+import com.krawczak.netflixPayments.domain.dto.UsersDto;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import org.springframework.stereotype.Service;
 
@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 public class MapUserToDto {
 
 
-  public UserDto userToDto(Users users) {
-    UserDto userDto = new UserDto();
+  public UsersDto userToDto(Users users) {
+    UsersDto usersDto = new UsersDto();
 
-    userDto.setUsername(users.getUsername());
-    userDto.setName(users.getName());
-    userDto.setSurname(users.getSurname());
+    usersDto.setUsername(users.getUsername());
+    usersDto.setName(users.getName());
+    usersDto.setSurname(users.getSurname());
 
-    return userDto;
+    return usersDto;
   }
 }

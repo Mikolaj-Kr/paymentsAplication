@@ -26,7 +26,7 @@ public class MapPaymentToDto {
       paymentDto.setRegulated(false);
     }
     paymentDto.setMonthOfPayment(getMonth.getMonth(payment.getDateOfPayment().getMonth().getValue()));
-    paymentDto.setUserDto(mapUserToDto.userToDto(payment.getUsers()));
+    paymentDto.setUsersDto(mapUserToDto.userToDto(payment.getUsers()));
     return paymentDto;
   }
 }

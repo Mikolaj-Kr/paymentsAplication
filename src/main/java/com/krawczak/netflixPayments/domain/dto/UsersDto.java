@@ -1,6 +1,6 @@
 package com.krawczak.netflixPayments.domain.dto;
 
-public class UserDto {
+public class UsersDto {
 
   private String username;
   private String name;
