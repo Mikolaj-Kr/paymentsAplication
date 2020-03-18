@@ -33,6 +33,9 @@ public class Users implements Serializable {
   @Column(name = "enabled")
   private int enabled;
 
+  @Column(name = "changePasswordCode")
+  private String changePasswordCode;
+
 
   @OneToMany(mappedBy = "users")
   List<Authorities> authorities = new ArrayList<>();
@@ -74,6 +77,14 @@ public class Users implements Serializable {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getChangePasswordCode() {
+    return changePasswordCode;
+  }
+
+  public void setChangePasswordCode(String changePasswordCode) {
+    this.changePasswordCode = changePasswordCode;
   }
 
   public List<Payment> getPayments() {

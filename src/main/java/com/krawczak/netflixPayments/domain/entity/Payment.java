@@ -25,6 +25,9 @@ public class Payment {
   @Column(name = "amount_of_payment")
   private Long amountOfPayment;
 
+  @Column(name = "status")
+  private String status;
+
   @ManyToOne
   @JoinColumn(name = "user_id")
   Users users;
@@ -61,6 +64,14 @@ public class Payment {
 
   public void setAmountOfPayment(Long amountOfPayment) {
     this.amountOfPayment = amountOfPayment;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   public Users getUsers() {

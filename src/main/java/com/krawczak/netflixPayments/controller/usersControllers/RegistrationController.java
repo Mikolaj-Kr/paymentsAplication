@@ -4,6 +4,7 @@ import com.krawczak.netflixPayments.configuration.PasswordEncoder;
 import com.krawczak.netflixPayments.domain.entity.Authorities;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
+import com.krawczak.netflixPayments.email.MailService;
 import com.krawczak.netflixPayments.service.AuthoritiesService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
@@ -11,8 +12,10 @@ import com.krawczak.netflixPayments.service.UserService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,9 @@ public class RegistrationController {
   @Autowired
   PaymentService paymentService;
 
+  @Autowired
+  MailService mailService;
+
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -69,6 +75,8 @@ public class RegistrationController {
       return new ResponseEntity<>(name, HttpStatus.OK);
     }
 
+    Random random = new Random();
+
     Users users = new Users();
     Authorities authorities = new Authorities();
     Payment payment = new Payment();
@@ -78,26 +86,34 @@ public class RegistrationController {
     users.setSurname(surname);
     users.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(password));
     users.setUsername(username);
-    users.setEnabled(1);
+    users.setEnabled(0);
+    users.setChangePasswordCode(passwordEncoder.bCryptPasswordEncoder().encode(String.valueOf(random.nextLong())));
     authorities.setUsers(users);
     authorities.setAuthority("User");
     payment.setAmountOfPayment(0L);
     payment.setDateOfPayment(LocalDate.now());
+    payment.setStatus("unpaid");
     payment.setUsers(users);
     paymentBefore.setAmountOfPayment(0L);
     paymentBefore.setDateOfPayment(LocalDate.now().plusMonths(1L));
+    paymentBefore.setStatus("unpaid");
     paymentBefore.setUsers(users);
     nextPayment.setAmountOfPayment(0L);
     nextPayment.setDateOfPayment(LocalDate.now().minusMonths(1L));
+    nextPayment.setStatus("unpaid");
     nextPayment.setUsers(users);
 
     userService.saveUser(users);
     authoritiesService.saveAuthorities(authorities);
-    paymentService.savePayment(paymentBefore);
-    paymentService.savePayment(payment);
     paymentService.savePayment(nextPayment);
+    paymentService.savePayment(payment);
+    paymentService.savePayment(paymentBefore);
+
+
 
     logger.info("User " + username + "Added to DB");
+
+    mailService.sendEmail(username, "Witaj " + username +" Wejdź w link aby aktywować konto    localhost:8080/pay-registration-confirm?username=" + username, "Potwierdzenie rejestracji w serwisie płatności");
 
     response.sendRedirect("/pay-registration-success");
 
@@ -107,6 +123,15 @@ public class RegistrationController {
   @GetMapping("/pay-registration-success")
   public ModelAndView registrationSuccess() {
     return new ModelAndView("main-site", getModelAndView("registrationSuccess"));
+  }
+
+  @GetMapping("/pay-registration-confirm")
+  public ModelAndView registrationConfirm(HttpServletRequest request){
+    Map<String, Object> params = getModelAndView.getModelAndViewParams("registrationConfirm");
+    String username = request.getParameter("username");
+    userService.confirmAccount(username);
+    logger.info("Account " + username + " activated");
+    return new ModelAndView("main-site", params );
   }
 
   @GetMapping("/pay-registration-wrong-password")

@@ -6,7 +6,7 @@ import com.krawczak.netflixPayments.mapper.MapPaymentToDto;
 import com.krawczak.netflixPayments.mapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.PaymentsRepository;
 import com.krawczak.netflixPayments.repositories.UserRepository;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,56 +19,79 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentService {
 
-  Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    PaymentsRepository paymentsRepository;
 
-  @Autowired
-  PaymentsRepository paymentsRepository;
+    @Autowired
+    MapPaymentToDto mapPaymentToDto;
 
-  @Autowired
-  MapPaymentToDto mapPaymentToDto;
+    @Autowired
+    GetPolishNames getPolishNames;
 
-  @Autowired
-  GetMonth getMonth;
+    @Autowired
+    UserRepository userRepository;
 
-  @Autowired
-  UserRepository userRepository;
+    @Autowired
+    MapUserToDto mapUserToDto;
 
-  @Autowired
-  MapUserToDto mapUserToDto;
-
-  public List<PaymentDto> getUserPayments(String username) {
-    List<PaymentDto> paymentsList = new ArrayList<>();
+    public List<PaymentDto> getUserPayments(String username) {
+        List<PaymentDto> paymentsList = new ArrayList<>();
         paymentsRepository.findPaymentByUsers(userRepository.findUsersByUsername(username))
-        .forEach(payment -> paymentsList.add(mapPaymentToDto.paymentDto(payment)));
+                .forEach(payment -> paymentsList.add(mapPaymentToDto.paymentDto(payment)));
         Collections.reverse(paymentsList);
-    return paymentsList;
-  }
+        return paymentsList;
+    }
 
-  public Payment getPaymentByUserAndDate(String username, LocalDate dateOfPayment){
-    return paymentsRepository.findPaymentByUsersAndDateOfPayment(userRepository.findUsersByUsername(username), dateOfPayment);
-  }
+    public Payment getLastUserPayment(String username){
+      List<PaymentDto> paymentsList = getUserPayments(username);
+      Collections.reverse(paymentsList);
+      return findPaymentById(paymentsList.get(paymentsList.size()-1).getId());
+    }
 
-  public List<PaymentDto> getAllPayment(){
-    List <Payment> payments = paymentsRepository.findAll();
-    List <PaymentDto> paymentsDto = new ArrayList<>();
-    payments.forEach(payment -> paymentsDto.add(mapPaymentToDto.paymentDto(payment)));
-    return paymentsDto;
-  }
+    public Payment findPaymentById(Long id) {
+        return paymentsRepository.findPaymentById(id);
+    }
 
-  public Payment findPaymentById(Long id){
-    return paymentsRepository.findPaymentById(id);
-  }
+    public void newPayController(Long id, String username) {
+        Payment payment = findPaymentById(id);
+        payment.setAmountOfPayment(10L);
+        payment.setStatus("inProgress");
+        addNewPay(username);
+        savePayment(payment);
+    }
 
-  public void newPayController(Long id){
-    Payment payment = findPaymentById(id);
-    payment.setAmountOfPayment(10L);
-    savePayment(payment);
-  }
+    public void changePayToPaid(Long id){
+        Payment payment = findPaymentById(id);
+        payment.setStatus("paid");
+        savePayment(payment);
+    }
 
-  public void savePayment(Payment payment){paymentsRepository.save(payment);
-  };
+    public void changePayToUnpaid(Long id){
+        Payment payment = findPaymentById(id);
+        payment.setStatus("unpaid");
+        savePayment(payment);
+    }
 
+    public void addNewPay(String username){
+      Payment payment = getLastUserPayment(username);
+      Payment nextPayment = new Payment();
+      nextPayment.setAmountOfPayment(10L);
+      nextPayment.setStatus("unpaid");
+      nextPayment.setDateOfPayment(payment.getDateOfPayment().plusMonths(1));
+      nextPayment.setUsers(userRepository.findUsersByUsername(username));
+      savePayment(nextPayment);
+    }
 
+    public void finishPayment(Long paymentId){
+        deletePayment(findPaymentById(paymentId));
+    }
 
-  }
+    public void savePayment(Payment payment) {
+        paymentsRepository.save(payment);
+    }
+
+    private void deletePayment(Payment payment){
+        paymentsRepository.delete(payment);
+    }
+}
 

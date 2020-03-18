@@ -29,6 +29,16 @@ public class UserService {
     return usersDtoList;
   }
 
+  public void confirmAccount(String username) {
+  Users user = findUserByUsername(username);
+  user.setEnabled(1);
+  saveUser(user);
+  }
+
+  public Users findUserByPasswordCode(Long code){
+    return userRepository.findUsersByChangePasswordCode(code);
+  }
+
   public void saveUser(Users users) {
     userRepository.save(users);
   }

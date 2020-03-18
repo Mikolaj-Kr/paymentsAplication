@@ -7,7 +7,7 @@ public class PaymentDto {
   private Long id;
   private LocalDate dateOfPayment;
   private Long amountOfPayment;
-  private boolean regulated;
+  private String status;
   private String monthOfPayment;
   private UsersDto usersDto;
 
@@ -35,16 +35,12 @@ public class PaymentDto {
     this.amountOfPayment = amountOfPayment;
   }
 
-  public boolean getIsRegulated() {
-    return regulated;
+  public String getStatus() {
+    return status;
   }
 
-  public boolean isRegulated() {
-    return regulated;
-  }
-
-  public void setRegulated(boolean regulated) {
-    this.regulated = regulated;
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   public String getMonthOfPayment() {

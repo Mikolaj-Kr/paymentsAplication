@@ -1,5 +1,4 @@
 <main class="inner cover">
-  <h1 class="cover-heading">Konto zarejestrowane poprawnie. <br> Zaloguj się aby skorzystać z
-    serwisu</h1>
-  <button class="btn btn-lg btn-block" onclick="locationReplace('/login')">Logowanie</button>
+  <h1 class="cover-heading">Konto zarejestrowane poprawnie. <br> Aby aktywować potwierdz linkiem w otzymanym mailu</h1>
+  <br> <h3> Wiadomość mogła trafić do spamu </h3>
 </main>

@@ -1,0 +1,1 @@
+<h1 class="alert-danger"> Wystąpił problem podczas zmiany hasła, spróbuj ponownie </h1>

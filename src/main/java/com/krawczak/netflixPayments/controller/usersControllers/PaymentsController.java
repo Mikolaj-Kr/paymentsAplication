@@ -4,6 +4,7 @@ import com.krawczak.netflixPayments.domain.dto.PaymentDto;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.Digits;
 
 @Controller
 public class PaymentsController {
@@ -37,9 +42,10 @@ public class PaymentsController {
     }
 
     @PostMapping("/pay-pay")
-    public ResponseEntity<String> postPay(@RequestParam(value = "paymentId") String paymentId) {
+    public ResponseEntity<String> postPay(@RequestParam(value = "paymentId") String paymentId, @RequestParam(value = "username") String username, HttpServletResponse response) throws IOException {
         logger.info("start paying for payment id: " + paymentId);
-        paymentService.newPayController(Long.valueOf(paymentId));
+        paymentService.newPayController(Long.valueOf(paymentId), username);
+        response.sendRedirect("/pay-payments");
         return new ResponseEntity<>(paymentId, HttpStatus.OK);
     }
 

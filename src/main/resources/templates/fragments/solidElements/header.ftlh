@@ -8,7 +8,7 @@
                 <a class="nav-link <#if site="registration">active</#if> " href="/pay-registration">Zarejestruj
                     się</a>
             <#elseif username = "mikolak25@gmail.com">
-                <a class="nav-link <#if site="main-admin">active</#if>" href="/pay-main">Strona główna</a>
+                <a class="nav-link <#if site="main">active</#if>" href="/pay-main">Strona główna</a>
                 <a class="nav-link <#if site="users">active</#if>" href="/pay-users">Użytkownicy</a>
                 <a class="nav-link <#if site="account">active</#if>" href="#">Konto</a>
                 <a class="nav-link" href="/logout">Wyloguj</a>

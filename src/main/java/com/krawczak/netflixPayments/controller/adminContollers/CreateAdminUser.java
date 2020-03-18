@@ -10,10 +10,7 @@ import com.krawczak.netflixPayments.service.PaymentService;
 import com.krawczak.netflixPayments.service.UserService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,56 +26,58 @@ import javax.servlet.ServletResponse;
 @Controller
 public class CreateAdminUser {
 
-  @Autowired
-  UserService userService;
+    @Autowired
+    UserService userService;
 
-  @Autowired
-  AuthoritiesService authoritiesService;
+    @Autowired
+    AuthoritiesService authoritiesService;
 
-  @Autowired
-  PasswordEncoder passwordEncoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-  @Autowired
-  PaymentService paymentService;
+    @Autowired
+    PaymentService paymentService;
 
-  @Autowired
-  GetModelAndView getModelAndView;
+    @Autowired
+    GetModelAndView getModelAndView;
 
-  Logger logger = LoggerFactory.getLogger(this.getClass());
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  @RequestMapping("pay-add-admin")
-  public ModelAndView getAdmin() {
-    Map<String, Object> params = getModelAndView.getModelAndViewParams("main");
-    Users users = new Users();
-    Authorities authorities = new Authorities();
-    Payment payment = new Payment();
-    Payment paymentBefore = new Payment();
-    Payment nextPayment = new Payment();
-    users.setName("Mikołaj");
-    users.setSurname("Krawczak");
-    users.setPassword(passwordEncoder.bCryptPasswordEncoder().encode("Mikolaj2511"));
-    users.setUsername("mikolak25@gmail.com");
-    users.setEnabled(1);
-    authorities.setUsers(users);
-    authorities.setAuthority("ADMIN");
-    payment.setAmountOfPayment(0L);
-    payment.setDateOfPayment(LocalDate.now());
-    payment.setUsers(users);
-    paymentBefore.setAmountOfPayment(0L);
-    paymentBefore.setDateOfPayment(LocalDate.now().plusMonths(1L));
-    paymentBefore.setUsers(users);
-    nextPayment.setAmountOfPayment(0L);
-    nextPayment.setDateOfPayment(LocalDate.now().minusMonths(1L));
-    nextPayment.setUsers(users);
+    @RequestMapping("/pay-add-admin")
+    public ModelAndView getAdmin() {
+      Random random = new Random();
+        Map<String, Object> params = getModelAndView.getModelAndViewParams("main");
+        Users users = new Users();
+        Authorities authorities = new Authorities();
+        Payment payment = new Payment();
+        Payment paymentBefore = new Payment();
+        Payment nextPayment = new Payment();
+        users.setName("Mikołaj");
+        users.setSurname("Krawczak");
+        users.setPassword(passwordEncoder.bCryptPasswordEncoder().encode("Mikolaj2511"));
+        users.setUsername("mikolak25@gmail.com");
+        users.setEnabled(1);
+        users.setChangePasswordCode(passwordEncoder.bCryptPasswordEncoder().encode(String.valueOf(random.nextLong())));
+        authorities.setUsers(users);
+        authorities.setAuthority("ADMIN");
+        payment.setAmountOfPayment(0L);
+        payment.setDateOfPayment(LocalDate.now());
+        payment.setUsers(users);
+        paymentBefore.setAmountOfPayment(0L);
+        paymentBefore.setDateOfPayment(LocalDate.now().plusMonths(1L));
+        paymentBefore.setUsers(users);
+        nextPayment.setAmountOfPayment(0L);
+        nextPayment.setDateOfPayment(LocalDate.now().minusMonths(1L));
+        nextPayment.setUsers(users);
 
-    userService.saveUser(users);
-    authoritiesService.saveAuthorities(authorities);
-    paymentService.savePayment(paymentBefore);
-    paymentService.savePayment(payment);
-    paymentService.savePayment(nextPayment);
+        userService.saveUser(users);
+        authoritiesService.saveAuthorities(authorities);
+        paymentService.savePayment(paymentBefore);
+        paymentService.savePayment(payment);
+        paymentService.savePayment(nextPayment);
 
-    logger.info("Admin added to DB");
+        logger.info("Admin added to DB");
 
-    return new ModelAndView("main-site", params);
-  }
+        return new ModelAndView("main-site", params);
+    }
 }
