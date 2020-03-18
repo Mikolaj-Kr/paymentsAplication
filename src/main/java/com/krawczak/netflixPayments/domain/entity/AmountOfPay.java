@@ -19,6 +19,14 @@ public class AmountOfPay {
   @Column(name = "amount_of_pay")
   private Long amountOfPay;
 
+  public AmountOfPay() {
+  }
+
+  public AmountOfPay(Long id, Long amountOfPay) {
+    this.id = id;
+    this.amountOfPay = amountOfPay;
+  }
+
   public Long getId() {
     return id;
   }

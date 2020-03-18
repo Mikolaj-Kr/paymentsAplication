@@ -1,13 +1,15 @@
 package com.krawczak.netflixPayments.domain.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PaymentDto {
 
   private Long id;
-  private Date dateOfPayment;
+  private LocalDate dateOfPayment;
   private Long amountOfPayment;
-  private UserDto userDto;
+  private String status;
+  private String monthOfPayment;
+  private UsersDto usersDto;
 
   public Long getId() {
     return id;
@@ -17,11 +19,11 @@ public class PaymentDto {
     this.id = id;
   }
 
-  public Date getDateOfPayment() {
+  public LocalDate getDateOfPayment() {
     return dateOfPayment;
   }
 
-  public void setDateOfPayment(Date dateOfPayment) {
+  public void setDateOfPayment(LocalDate dateOfPayment) {
     this.dateOfPayment = dateOfPayment;
   }
 
@@ -33,11 +35,27 @@ public class PaymentDto {
     this.amountOfPayment = amountOfPayment;
   }
 
-  public UserDto getUserDto() {
-    return userDto;
+  public String getStatus() {
+    return status;
   }
 
-  public void setUserDto(UserDto userDto) {
-    this.userDto = userDto;
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public String getMonthOfPayment() {
+    return monthOfPayment;
+  }
+
+  public void setMonthOfPayment(String monthOfPayment) {
+    this.monthOfPayment = monthOfPayment;
+  }
+
+  public UsersDto getUsersDto() {
+    return usersDto;
+  }
+
+  public void setUsersDto(UsersDto usersDto) {
+    this.usersDto = usersDto;
   }
 }

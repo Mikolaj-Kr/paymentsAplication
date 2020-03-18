@@ -2,13 +2,19 @@ package com.krawczak.netflixPayments.service;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GetModelAndView {
 
-  public ModelAndView getModelAndView(String page) {
+  @Autowired
+  UserService userService;
+
+  public Map<String, Object> getModelAndViewParams(String page) {
     Map<String, Object> params = new HashMap<>();
     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String username;
@@ -19,6 +25,8 @@ public class GetModelAndView {
     }
     params.put("site", page);
     params.put("username", username);
-    return new ModelAndView("main-site", params);
+    params.put("user", userService.findUserByUsername(username));
+    return params;
   }
+
 }

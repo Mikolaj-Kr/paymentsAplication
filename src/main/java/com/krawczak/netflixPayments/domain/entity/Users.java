@@ -26,15 +26,15 @@ public class Users implements Serializable {
   @Column(name = "surname")
   private String surname;
 
-  @Column(name = "email")
-  private String email;
-
   @NotEmpty
   @Column(name = "password")
   private String password;
 
   @Column(name = "enabled")
   private int enabled;
+
+  @Column(name = "changePasswordCode")
+  private String changePasswordCode;
 
 
   @OneToMany(mappedBy = "users")
@@ -79,6 +79,14 @@ public class Users implements Serializable {
     this.password = password;
   }
 
+  public String getChangePasswordCode() {
+    return changePasswordCode;
+  }
+
+  public void setChangePasswordCode(String changePasswordCode) {
+    this.changePasswordCode = changePasswordCode;
+  }
+
   public List<Payment> getPayments() {
     return payments;
   }
@@ -102,13 +110,5 @@ public class Users implements Serializable {
   public void setAuthorities(
       List<Authorities> authorities) {
     this.authorities = authorities;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 }

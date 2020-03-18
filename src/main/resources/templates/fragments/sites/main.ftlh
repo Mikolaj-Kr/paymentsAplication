@@ -7,6 +7,6 @@
         Rejestracja
       </button>
     <#else >
-      <h1 class="cover-heading">Witaj ${username}</h1>
+      <h1 class="cover-heading">Witaj ${user.name}</h1>
     </#if>
 </main>

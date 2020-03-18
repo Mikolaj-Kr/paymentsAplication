@@ -1,5 +1,6 @@
 package com.krawczak.netflixPayments.domain.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,14 +20,27 @@ public class Payment {
   private Long id;
 
   @Column(name = "date_of_payment")
-  private Date dateOfPayment;
+  private LocalDate dateOfPayment;
 
   @Column(name = "amount_of_payment")
   private Long amountOfPayment;
 
+  @Column(name = "status")
+  private String status;
+
   @ManyToOne
   @JoinColumn(name = "user_id")
   Users users;
+
+  public Payment(Long id, LocalDate dateOfPayment, Long amountOfPayment, Users users) {
+    this.id =  id;
+    this.dateOfPayment = dateOfPayment;
+    this.amountOfPayment = amountOfPayment;
+    this.users = users;
+  }
+
+  public Payment() {
+  }
 
   public Long getId() {
     return id;
@@ -36,11 +50,11 @@ public class Payment {
     this.id = id;
   }
 
-  public Date getDateOfPayment() {
+  public LocalDate getDateOfPayment() {
     return dateOfPayment;
   }
 
-  public void setDateOfPayment(Date dateOfPayment) {
+  public void setDateOfPayment(LocalDate dateOfPayment) {
     this.dateOfPayment = dateOfPayment;
   }
 
@@ -50,6 +64,14 @@ public class Payment {
 
   public void setAmountOfPayment(Long amountOfPayment) {
     this.amountOfPayment = amountOfPayment;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   public Users getUsers() {
