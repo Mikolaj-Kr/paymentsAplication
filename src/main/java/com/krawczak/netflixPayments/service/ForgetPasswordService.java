@@ -33,7 +33,7 @@ public class ForgetPasswordService {
         Users users = userService.findUserByUsername(username);
         users.setChangePasswordCode(passwordEncoder.bCryptPasswordEncoder().encode((randomLong)));
         userService.saveUser(users);
-        mailService.sendEmail(username, "Aby odzyskać hasło do swojego konta, użyj linku.  localhost:8080/pay-forget-change-password?code=" + randomLong + "&username=" + username, "Odzyskiwanie hasła");
+        mailService.sendEmail(username, "Aby odzyskać hasło do swojego konta, użyj linku.  https://paymentmk.herokuapp.com/pay-forget-change-password?code=" + randomLong + "&username=" + username, "Odzyskiwanie hasła");
     }
 
     public String changePassword(String password, String password2, String username, String code) {
