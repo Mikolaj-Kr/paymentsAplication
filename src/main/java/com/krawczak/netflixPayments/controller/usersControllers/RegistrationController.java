@@ -113,7 +113,7 @@ public class RegistrationController {
 
     logger.info("User " + username + "Added to DB");
 
-    mailService.sendEmail(username, "Witaj " + username +" Wejdź w link aby aktywować konto    localhost:8080/pay-registration-confirm?username=" + username, "Potwierdzenie rejestracji w serwisie płatności");
+    mailService.sendEmail(username, "Witaj " + username +" Wejdź w link aby aktywować konto    https://paymentmk.herokuapp.com/pay-registration-confirm?username=" + username, "Potwierdzenie rejestracji w serwisie płatności");
 
     response.sendRedirect("/pay-registration-success");
 
