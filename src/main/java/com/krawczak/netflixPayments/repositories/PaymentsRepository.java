@@ -13,7 +13,7 @@ public interface PaymentsRepository extends JpaRepository<Payment, Long> {
 
   List<Payment> findAll();
 
-  List<Payment> findPaymentByUsers(Users users);
+  List<Payment> findPaymentByUsersOrderByDateOfPayment(Users users);
 
   Payment findPaymentById(Long id);
 

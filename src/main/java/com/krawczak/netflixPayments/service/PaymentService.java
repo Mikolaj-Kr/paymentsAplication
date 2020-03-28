@@ -36,7 +36,7 @@ public class PaymentService {
 
     public List<PaymentDto> getUserPayments(String username) {
         List<PaymentDto> paymentsList = new ArrayList<>();
-        paymentsRepository.findPaymentByUsers(userRepository.findUsersByUsername(username))
+        paymentsRepository.findPaymentByUsersOrderByDateOfPayment(userRepository.findUsersByUsername(username))
                 .forEach(payment -> paymentsList.add(mapPaymentToDto.paymentDto(payment)));
         Collections.reverse(paymentsList);
         return paymentsList;
