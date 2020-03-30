@@ -12,10 +12,10 @@
             <tr>
                 <th scope="row" bgcolor="<#if payment.status == "paid" > #006633 <#elseif payment.status == "unpaid"> #CC6666 <#elseif payment.status == "inProgress"> #6699FF </#if>"> ${payment.monthOfPayment} </th>
                 <td>
-                    <form id="payment" action="/pay-pay" method="post">
+                    <form id="payment" <#if payment.status= "unpaid"> action="/pay-pay" <#elseif payment.status == "inProgress"> action="pay-unpaid" </#if>  method="post">
                         <input type="hidden" name="paymentId" value="${payment.id}">
                         <input type="hidden" name="username" value="${user.username}">
-                       <#if payment.status == "unpaid">  <button> Zapłać </button> <#else> ${payment.status}  </#if>
+                       <#if payment.status == "unpaid">  <button class="btn-sm btn-success" > Opłacono </button> <#elseif payment.status == "inProgress"> W trakcie(poczekaj na potwierdzenie) <button class="btn-sm btn-danger"> Nieopłacono </button> <#else> Opłacono </#if>
                     </form>
                 </td>
             </tr>

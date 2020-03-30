@@ -15,7 +15,10 @@
                     <td> ${user.username} </td>
                     <td>
                         <a href="/pay-users-payments?username=${user.username}"> <button class="btn-dark btn-sm"> Zobacz Płatności </button> </a>
-                        <button class="btn-danger btn-sm"> Usuń użytkownika </button>
+                        <form id="delete user" action="/pay-user-delete-user" method="post">
+                        <input type="hidden" name="username" value="${user.username}">
+                            <button class="btn-danger btn-sm">Usuń użytkownika</button>
+                        </form>
                     </td>
                 </tr>
             </#items>

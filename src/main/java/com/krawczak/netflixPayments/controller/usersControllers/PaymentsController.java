@@ -49,6 +49,13 @@ public class PaymentsController {
         return new ResponseEntity<>(paymentId, HttpStatus.OK);
     }
 
+    @PostMapping("/pay-unpaid")
+    public ResponseEntity<String> postPay(@RequestParam(value = "paymentId") String paymentId, HttpServletResponse response) throws IOException {
+        paymentService.changePayToUnpaid(Long.valueOf(paymentId));
+        response.sendRedirect("/pay-payments");
+        return new ResponseEntity<>(paymentId, HttpStatus.OK);
+    }
+
     private Map<String, Object> getModelAndView(String page) {
         return getModelAndView.getModelAndViewParams(page);
     }

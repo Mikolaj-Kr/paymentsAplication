@@ -6,6 +6,5 @@
   <label for="password" class="sr-only">Hasło</label>
   <input id="password" name="password" type="password" class="form-control" placeholder="Hasło"
          required><br>
-  <a href="/pay-forget-password">Zapomniałem hasła</a>
   <button class="btn btn-lg btn-block" type="submit">Logowanie</button>
 </form>
