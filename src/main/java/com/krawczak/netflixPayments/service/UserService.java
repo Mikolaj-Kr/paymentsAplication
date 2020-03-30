@@ -19,6 +19,12 @@ public class UserService {
   @Autowired
   MapUserToDto mapUserToDto;
 
+  @Autowired
+  AuthoritiesService authoritiesService;
+
+  @Autowired
+  PaymentService paymentService;
+
   public Users findUserByUsername(String username) {
     return userRepository.findUsersByUsername(username);
   }
@@ -35,11 +41,13 @@ public class UserService {
   saveUser(user);
   }
 
-  public Users findUserByPasswordCode(Long code){
-    return userRepository.findUsersByChangePasswordCode(code);
-  }
-
   public void saveUser(Users users) {
     userRepository.save(users);
+  }
+
+  public void deleteUser(String username) {
+    authoritiesService.deleteAuthorities(findUserByUsername(username));
+    paymentService.deleteUserPayments(findUserByUsername(username));
+    userRepository.delete(findUserByUsername(username));
   }
 }

@@ -2,6 +2,7 @@ package com.krawczak.netflixPayments.service;
 
 import com.krawczak.netflixPayments.domain.dto.PaymentDto;
 import com.krawczak.netflixPayments.domain.entity.Payment;
+import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.mapper.MapPaymentToDto;
 import com.krawczak.netflixPayments.mapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.PaymentsRepository;
@@ -80,6 +81,11 @@ public class PaymentService {
       nextPayment.setDateOfPayment(payment.getDateOfPayment().plusMonths(1));
       nextPayment.setUsers(userRepository.findUsersByUsername(username));
       savePayment(nextPayment);
+    }
+
+    public void deleteUserPayments(Users users){
+        List<Payment> paymentList = paymentsRepository.findPaymentByUsersOrderByDateOfPayment(users);
+        paymentList.forEach(payment -> paymentsRepository.delete(payment));
     }
 
     public void finishPayment(Long paymentId){

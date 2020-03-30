@@ -17,6 +17,4 @@ public interface PaymentsRepository extends JpaRepository<Payment, Long> {
 
   Payment findPaymentById(Long id);
 
-  Payment findPaymentByUsersAndDateOfPayment(Users users, LocalDate date);
-
   }

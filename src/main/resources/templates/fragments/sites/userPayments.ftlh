@@ -30,10 +30,15 @@
                                 <button class="btn-sm btn-success"> Zakończ płatność </button>
                             </form>
                         <#else>
-                            <form id="changePayment" action="/pay-user-add-payment" method="post">
+                            <form id="changePaymentToPaid" action="/pay-user-add-payment" method="post">
                                 <input type="hidden" name="paymentId" value="${payment.id}">
                                 <input type="hidden" name="username" value="${currentUser.username}">
                              <button class="btn-sm btn-dark"> Opłacono </button>
+                            </form>
+                            <form id="changePaymentToUnpaid" action="/pay-user-delete-payment" method="post">
+                            <input type="hidden" name="paymentId" value="${payment.id}">
+                            <input type="hidden" name="username" value="${currentUser.username}">
+                            <button class="btn-sm btn-danger"> Nieopłacono </button>
                             </form>
                         </#if>
                     </td>
