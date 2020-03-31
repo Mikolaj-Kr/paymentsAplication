@@ -15,7 +15,7 @@
             <#else>
                 <a class="nav-link <#if site="main">active</#if>" href="/pay-main">Strona główna</a>
                 <a class="nav-link <#if site="payments">active</#if>" href="/pay-payments">Płatności</a>
-                <a class="nav-link" href="#">Konto</a>
+                <a class="nav-link <#if site="account"> active </#if>" href="/pay-account">Konto</a>
                 <a class="nav-link" href="/logout">Wyloguj</a>
             </#if>
         </nav>
