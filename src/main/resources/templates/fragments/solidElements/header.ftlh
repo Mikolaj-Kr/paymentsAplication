@@ -10,7 +10,7 @@
             <#elseif username = "mikolak25@gmail.com">
                 <a class="nav-link <#if site="main">active</#if>" href="/pay-main">Strona główna</a>
                 <a class="nav-link <#if site="users">active</#if>" href="/pay-users">Użytkownicy</a>
-                <a class="nav-link <#if site="account">active</#if>" href="#">Konto</a>
+                <a class="nav-link <#if site="account">active</#if>" href="/pay-account">Konto</a>
                 <a class="nav-link" href="/logout">Wyloguj</a>
             <#else>
                 <a class="nav-link <#if site="main">active</#if>" href="/pay-main">Strona główna</a>
