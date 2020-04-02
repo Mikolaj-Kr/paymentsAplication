@@ -29,7 +29,6 @@ public class ForgetPasswordService {
     public void forgetPassword(String username) {
         Random random = new Random();
         String randomLong = String.valueOf(random.nextLong());
-        logger.info(randomLong);
         Users users = userService.findUserByUsername(username);
         users.setChangePasswordCode(passwordEncoder.bCryptPasswordEncoder().encode((randomLong)));
         userService.saveUser(users);
