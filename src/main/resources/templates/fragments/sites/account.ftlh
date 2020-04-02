@@ -1,3 +1,12 @@
-Imię i nazwisko: ${user.name} ${user.surname}
-mail: ${user.username}
-<a href="/pay-account-change-password"> zmień hasło</a>
+<table class="table table table-dark">
+  <tr>
+    <td>Imię i nazwisko</td>
+    <td>${user.name} ${user.surname}</td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td>${user.username}</td>
+  </tr>
+</table>
+<br>
+<a href="/pay-account-change-password" class="alert-danger"> zmień hasło</a>

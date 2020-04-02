@@ -36,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pay-user-delete-payment").hasAuthority("ADMIN")
                 .antMatchers("/pay-user-add-new-payment").hasAuthority("ADMIN")
                 .antMatchers("/pay-payments").hasAuthority("User")
+                .antMatchers("/pay-account").hasAuthority("User")
+                .antMatchers("/pay-account-change-password").hasAuthority("User")
                 .antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/pay-registration").permitAll()
                 .and()
