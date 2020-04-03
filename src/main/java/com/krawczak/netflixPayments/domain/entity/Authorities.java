@@ -1,19 +1,23 @@
 package com.krawczak.netflixPayments.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "authorities")
 public class Authorities {
 
   @Id
-  @Column(name = "authority")
-  private String authority;
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+//  @Column(name = "authority")
+//  String authority;
+
+
+  @ManyToOne
+  @JoinColumn(name = "authority")
+  Authority authority;
 
   @ManyToOne
   @JoinColumn(name = "username")
@@ -22,11 +26,19 @@ public class Authorities {
   public Authorities() {
   }
 
-  public String getAuthority() {
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Authority getAuthority() {
     return authority;
   }
 
-  public void setAuthority(String authority) {
+  public void setAuthority(Authority authority) {
     this.authority = authority;
   }
 

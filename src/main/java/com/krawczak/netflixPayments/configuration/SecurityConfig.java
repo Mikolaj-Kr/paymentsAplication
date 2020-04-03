@@ -25,7 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource);
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().authorizeRequests()
@@ -35,9 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pay-user-add-payment").hasAuthority("ADMIN")
                 .antMatchers("/pay-user-delete-payment").hasAuthority("ADMIN")
                 .antMatchers("/pay-user-add-new-payment").hasAuthority("ADMIN")
-                .antMatchers("/pay-payments").hasAuthority("User")
-                .antMatchers("/pay-account").hasAuthority("User")
-                .antMatchers("/pay-account-change-password").hasAuthority("User")
+                .antMatchers("/pay-payments").hasAuthority("USER")
+                .antMatchers("/pay-account").hasAuthority("USER")
+                .antMatchers("/pay-account-change-password").hasAuthority("USER")
                 .antMatchers("/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/pay-registration").permitAll()
                 .and()
