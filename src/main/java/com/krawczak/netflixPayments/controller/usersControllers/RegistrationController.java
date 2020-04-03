@@ -2,13 +2,12 @@ package com.krawczak.netflixPayments.controller.usersControllers;
 
 import com.krawczak.netflixPayments.configuration.PasswordEncoder;
 import com.krawczak.netflixPayments.domain.entity.Authorities;
+import com.krawczak.netflixPayments.domain.entity.Authority;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.email.MailService;
-import com.krawczak.netflixPayments.service.AuthoritiesService;
-import com.krawczak.netflixPayments.service.GetModelAndView;
-import com.krawczak.netflixPayments.service.PaymentService;
-import com.krawczak.netflixPayments.service.UserService;
+import com.krawczak.netflixPayments.service.*;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
@@ -49,6 +48,9 @@ public class RegistrationController {
   @Autowired
   MailService mailService;
 
+  @Autowired
+  AuthorityService authorityService;
+
   Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -79,6 +81,7 @@ public class RegistrationController {
 
     Users users = new Users();
     Authorities authorities = new Authorities();
+    Authority authority = new Authority();
     Payment payment = new Payment();
     Payment paymentBefore = new Payment();
     Payment nextPayment = new Payment();
@@ -88,8 +91,9 @@ public class RegistrationController {
     users.setUsername(username);
     users.setEnabled(0);
     users.setChangePasswordCode(passwordEncoder.bCryptPasswordEncoder().encode(String.valueOf(random.nextLong())));
+    authority.setAuthority("USER");
     authorities.setUsers(users);
-    authorities.setAuthority("User");
+    authorities.setAuthority(authority);
     payment.setAmountOfPayment(0L);
     payment.setDateOfPayment(LocalDate.now());
     payment.setStatus("unpaid");
@@ -104,6 +108,7 @@ public class RegistrationController {
     nextPayment.setUsers(users);
 
     userService.saveUser(users);
+    authorityService.saveAuthority(authority);
     authoritiesService.saveAuthorities(authorities);
     paymentService.savePayment(nextPayment);
     paymentService.savePayment(payment);
