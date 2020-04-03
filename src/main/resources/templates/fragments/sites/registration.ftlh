@@ -7,7 +7,7 @@
   Nazwisko <input id="surname" name="surname" type="text" class="form-control" placeholder="Nazwisko"
          required autofocus> <br>
   <label for="username" class="sr-only">email</label>
-  Email <input id="username" name="username" type="text" class="form-control"
+  Email <input id="username" name="username" type="email" class="form-control"
          placeholder="email" required autofocus><br>
   <label for="password" class="sr-only">Hasło</label>
   Hasło <input id="password" name="password" type="password" class="form-control" placeholder="Hasło"
