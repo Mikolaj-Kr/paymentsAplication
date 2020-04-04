@@ -19,3 +19,9 @@ function confirmSendRemindMail() {
     message.innerText = "Wysyłam..."
 }
 
+function registration() {
+    const message = document.getElementById('registrationMessage');
+    message.style.color = "green";
+    message.innerText = "Rejestracja..."
+}
+

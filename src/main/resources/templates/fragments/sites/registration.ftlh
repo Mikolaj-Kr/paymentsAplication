@@ -16,5 +16,7 @@
   Powtórz hasło <input id="password2" name="password2" type="password" class="form-control"
          placeholder="Powtórz hasło" onkeyup="checkPass()" required><br>
   <span id="confirmMessage"></span>
-  <button class="btn btn-lg btn-block" type="submit">Rejestracja</button>
+  <button class="btn btn-lg btn-block" type="submit"  onclick="registration()">Rejestracja</button>
+  <span id="registrationMessage"></span>
 </form>
+
