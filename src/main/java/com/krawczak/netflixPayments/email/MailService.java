@@ -2,6 +2,10 @@ package com.krawczak.netflixPayments.email;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
+import com.krawczak.netflixPayments.service.GetPolishNames;
+import com.krawczak.netflixPayments.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -11,6 +15,12 @@ import org.springframework.stereotype.Service;
 public class MailService {
 
     private JavaMailSender javaMailSender;
+
+    @Autowired
+    PaymentService paymentService;
+
+    @Autowired
+    GetPolishNames getPolishNames;
 
     public MailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -28,6 +38,12 @@ public class MailService {
             e.printStackTrace();
         }
         javaMailSender.send(mail);
+    }
+
+    public void remandingMail(String username){
+        String content = "Koleżko, koleżanko, netflixa masz opłaconego do: " + paymentService.getLastPaidUserPayment(username).getMonthOfPayment() + "(włącznie). Po szczegóły zapraszam na https://paymentmk.herokuapp.com/pay-main";
+        String subject = "Netflix info";
+        sendEmail(username, content, subject);
     }
 
 }

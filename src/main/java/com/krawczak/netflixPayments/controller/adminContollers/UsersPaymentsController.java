@@ -1,6 +1,7 @@
 package com.krawczak.netflixPayments.controller.adminContollers;
 
 import com.krawczak.netflixPayments.domain.entity.Payment;
+import com.krawczak.netflixPayments.email.MailService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
 import com.krawczak.netflixPayments.service.UserService;
@@ -31,6 +32,9 @@ public class UsersPaymentsController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    MailService mailService;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -72,6 +76,14 @@ public class UsersPaymentsController {
         paymentService.finishPayment(Long.valueOf(paymentId));
         logger.info("Payment: " + paymentId + "deleted");
         response.sendRedirect("pay-users-payments?username=" + username);
+        return new ResponseEntity<>(username, HttpStatus.OK);
+    }
+
+    @PostMapping("/pay-user-remind-payment")
+    public ResponseEntity<String> postRemindPayment(@RequestParam(value = "username") String username, HttpServletResponse response) throws IOException {
+        mailService.remandingMail(username);
+        logger.info("Remanding mail send to " + username);
+        response.sendRedirect("/pay-users-payments?username=" + username);
         return new ResponseEntity<>(username, HttpStatus.OK);
     }
 }
