@@ -1,6 +1,7 @@
 package com.krawczak.netflixPayments.controller.usersControllers;
 
 import com.krawczak.netflixPayments.domain.dto.PaymentDto;
+import com.krawczak.netflixPayments.email.MailService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +43,17 @@ public class PaymentsController {
         return new ModelAndView("main-site", params);
     }
 
+    @GetMapping("/pay-pay")
+    public ModelAndView getPayController(){
+        Map<String, Object> params = getModelAndView("payInfo");
+        return new ModelAndView("main-site", params);
+    }
+
     @PostMapping("/pay-pay")
     public ResponseEntity<String> postPay(@RequestParam(value = "paymentId") String paymentId, @RequestParam(value = "username") String username, HttpServletResponse response) throws IOException {
         logger.info("start paying for payment id: " + paymentId);
         paymentService.newPayController(Long.valueOf(paymentId), username);
-        response.sendRedirect("/pay-payments");
+        response.sendRedirect("/pay-pay");
         return new ResponseEntity<>(paymentId, HttpStatus.OK);
     }
 

@@ -15,7 +15,7 @@
                     <form id="payment" <#if payment.status= "unpaid"> action="/pay-pay" <#elseif payment.status == "inProgress"> action="pay-unpaid" </#if>  method="post">
                         <input type="hidden" name="paymentId" value="${payment.id}">
                         <input type="hidden" name="username" value="${user.username}">
-                       <#if payment.status == "unpaid">  <button class="btn-sm btn-success" > Opłacono </button> <#elseif payment.status == "inProgress"> W trakcie(poczekaj na potwierdzenie) <button class="btn-sm btn-danger"> Nieopłacono </button> <#else> Opłacono </#if>
+                       <#if payment.status == "unpaid">  <button class="btn-sm btn-success" > Zapłać </button> <#elseif payment.status == "inProgress"> W trakcie(poczekaj na potwierdzenie przelewu) <a href="/pay-pay" class="btn-outline-info">Informacje do przelewu</a>  <#else> Opłacono </#if>
                     </form>
                 </td>
             </tr>
