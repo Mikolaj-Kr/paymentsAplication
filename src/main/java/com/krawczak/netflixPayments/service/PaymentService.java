@@ -30,14 +30,14 @@ public class PaymentService {
     GetPolishNames getPolishNames;
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Autowired
     MapUserToDto mapUserToDto;
 
     public List<PaymentDto> getUserPayments(String username) {
         List<PaymentDto> paymentsList = new ArrayList<>();
-        paymentsRepository.findPaymentByUsersOrderByDateOfPayment(userRepository.findUsersByUsername(username))
+        paymentsRepository.findPaymentByUsersOrderByDateOfPayment(userService.findUserByUsername(username))
                 .forEach(payment -> paymentsList.add(mapPaymentToDto.paymentDto(payment)));
         Collections.reverse(paymentsList);
         return paymentsList;
@@ -47,6 +47,13 @@ public class PaymentService {
       List<PaymentDto> paymentsList = getUserPayments(username);
       Collections.reverse(paymentsList);
       return findPaymentById(paymentsList.get(paymentsList.size()-1).getId());
+    }
+
+    public PaymentDto getLastPaidUserPayment(String username){
+        List<PaymentDto> paymentList = new ArrayList<>();
+        paymentsRepository.findPaymentByUsersAndStatusOrderByDateOfPayment(userService.findUserByUsername(username), "paid")
+                      .forEach(payment -> paymentList.add(mapPaymentToDto.paymentDto(payment)));
+        return paymentList.get(paymentList.size()-1);
     }
 
     public Payment findPaymentById(Long id) {
@@ -79,7 +86,7 @@ public class PaymentService {
       nextPayment.setAmountOfPayment(10L);
       nextPayment.setStatus("unpaid");
       nextPayment.setDateOfPayment(payment.getDateOfPayment().plusMonths(1));
-      nextPayment.setUsers(userRepository.findUsersByUsername(username));
+      nextPayment.setUsers(userService.findUserByUsername(username));
       savePayment(nextPayment);
     }
 
