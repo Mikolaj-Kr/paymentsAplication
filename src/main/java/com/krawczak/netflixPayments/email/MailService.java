@@ -5,6 +5,7 @@ import javax.mail.internet.MimeMessage;
 
 import com.krawczak.netflixPayments.service.GetPolishNames;
 import com.krawczak.netflixPayments.service.PaymentService;
+import com.krawczak.netflixPayments.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,6 +22,9 @@ public class MailService {
 
     @Autowired
     GetPolishNames getPolishNames;
+
+    @Autowired
+    UserService userService;
 
     public MailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -41,7 +45,7 @@ public class MailService {
     }
 
     public void remandingMail(String username){
-        String content = "Koleżko, koleżanko, netflixa masz opłaconego do: " + paymentService.getLastPaidUserPayment(username).getMonthOfPayment() + "(włącznie). Po szczegóły zapraszam na https://paymentmk.herokuapp.com/pay-main";
+        String content = userService.findUserByUsername(username).getName() + " netflixa masz opłaconego do: " + paymentService.getLastPaidUserPayment(username).getMonthOfPayment() + "(włącznie). Po szczegóły zapraszam na https://paymentmk.herokuapp.com/pay-payments";
         String subject = "Netflix info";
         sendEmail(username, content, subject);
     }
