@@ -2,7 +2,7 @@ package com.krawczak.netflixPayments.service;
 
 import com.krawczak.netflixPayments.domain.dto.UsersDto;
 import com.krawczak.netflixPayments.domain.entity.Users;
-import com.krawczak.netflixPayments.mapper.MapUserToDto;
+import com.krawczak.netflixPayments.mapper.databaseMapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

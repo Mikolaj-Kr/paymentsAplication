@@ -3,17 +3,14 @@ package com.krawczak.netflixPayments.service;
 import com.krawczak.netflixPayments.domain.dto.PaymentDto;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
-import com.krawczak.netflixPayments.mapper.MapPaymentToDto;
-import com.krawczak.netflixPayments.mapper.MapUserToDto;
+import com.krawczak.netflixPayments.mapper.databaseMapper.MapPaymentToDto;
+import com.krawczak.netflixPayments.mapper.databaseMapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.PaymentsRepository;
-import com.krawczak.netflixPayments.repositories.UserRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

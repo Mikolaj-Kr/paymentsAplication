@@ -25,3 +25,9 @@ function registration() {
     message.innerText = "Rejestracja..."
 }
 
+function dotPay() {
+    const message = document.getElementById('registrationMessage');
+    message.style.color = "green";
+    message.innerText = "Przekierowywanie do DotPay"
+}
+

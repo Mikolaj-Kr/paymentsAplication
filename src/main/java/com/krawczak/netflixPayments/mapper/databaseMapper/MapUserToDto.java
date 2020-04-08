@@ -1,4 +1,4 @@
-package com.krawczak.netflixPayments.mapper;
+package com.krawczak.netflixPayments.mapper.databaseMapper;
 
 import com.krawczak.netflixPayments.domain.dto.UsersDto;
 import com.krawczak.netflixPayments.domain.entity.Users;

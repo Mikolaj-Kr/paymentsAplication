@@ -1,7 +1,9 @@
 package com.krawczak.netflixPayments.controller.usersControllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.krawczak.netflixPayments.domain.dto.PaymentDto;
 import com.krawczak.netflixPayments.email.MailService;
+import com.krawczak.netflixPayments.mapper.apiMapper.MyAccountMapper;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
 
@@ -9,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +37,9 @@ public class PaymentsController {
     @Autowired
     PaymentService paymentService;
 
+    @Autowired
+    MyAccountMapper myAccountMapper;
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/pay-payments")
@@ -47,6 +53,12 @@ public class PaymentsController {
     public ModelAndView getPayController(){
         Map<String, Object> params = getModelAndView("payInfo");
         return new ModelAndView("main-site", params);
+    }
+
+    @PostMapping("/pay-dot")
+    public ResponseEntity<String> postPayByDotPay(@RequestParam(value = "username") String username) throws JsonProcessingException, UnirestException {
+        myAccountMapper.parseMyAccount();
+        return new ResponseEntity<>(username, HttpStatus.OK);
     }
 
     @PostMapping("/pay-pay")
