@@ -1,18 +1,17 @@
 package com.krawczak.netflixPayments.controller.usersControllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.krawczak.netflixPayments.domain.dto.PaymentDto;
-import com.krawczak.netflixPayments.email.MailService;
-import com.krawczak.netflixPayments.mapper.apiMapper.MyAccountMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.krawczak.netflixPayments.domain.dotPayApi.paymentInformation.Payer;
+import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
+import com.krawczak.netflixPayments.service.dotPayServices.DotPayService;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.Digits;
 
 @Controller
 public class PaymentsController {
@@ -38,7 +35,8 @@ public class PaymentsController {
     PaymentService paymentService;
 
     @Autowired
-    MyAccountMapper myAccountMapper;
+    DotPayService dotPayService;
+
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -57,8 +55,17 @@ public class PaymentsController {
 
     @PostMapping("/pay-dot")
     public ResponseEntity<String> postPayByDotPay(@RequestParam(value = "username") String username) throws JsonProcessingException, UnirestException {
-        myAccountMapper.parseMyAccount();
         return new ResponseEntity<>(username, HttpStatus.OK);
+    }
+
+    @PostMapping("/pay-test")
+    public ResponseEntity<String> postPayTest() throws JsonProcessingException, UnirestException {
+        Payer payer = new Payer();
+        payer.setEmail("test");
+        payer.setFirstName("test");
+        payer.setLastName("test");
+        payer.setPhone("test");
+        return new ResponseEntity<>(dotPayService.createPaymentLink("test","test",payer), HttpStatus.OK);
     }
 
     @PostMapping("/pay-pay")

@@ -32,7 +32,7 @@ public class Result {
     Config config;
 
     @JsonProperty("balance")
-    Balance balance;
+    List<Balance> balance;
 
     public String getHref() {
         return href;
@@ -90,11 +90,11 @@ public class Result {
         this.config = config;
     }
 
-    public Balance getBalance() {
+    public List<Balance> getBalance() {
         return balance;
     }
 
-    public void setBalance(Balance balance) {
+    public void setBalance(List<Balance> balance) {
         this.balance = balance;
     }
 }
