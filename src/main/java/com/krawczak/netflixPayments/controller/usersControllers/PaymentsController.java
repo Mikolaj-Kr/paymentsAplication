@@ -8,6 +8,7 @@ import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import com.krawczak.netflixPayments.service.dotPayServices.DotPayService;
@@ -59,7 +60,7 @@ public class PaymentsController {
     }
 
     @PostMapping("/pay-test")
-    public ResponseEntity<String> postPayTest() throws JsonProcessingException, UnirestException {
+    public ResponseEntity<String> postPayTest() throws JsonProcessingException, UnirestException, NoSuchAlgorithmException {
         Payer payer = new Payer();
         payer.setEmail("test");
         payer.setFirstName("test");

@@ -25,7 +25,6 @@ public class CreateJson {
         json.put("control", control);
         json.put("language", "pl");
         json.put("ignore_last_payment_channel", 1);
-        json.put("redirection_type", 0);
         json.put("url", "url");
         json.put("urlc", "url");
         json.put("payer", payerJson);
