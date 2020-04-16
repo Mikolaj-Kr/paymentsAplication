@@ -6,6 +6,7 @@ import com.krawczak.netflixPayments.domain.dotPayApi.MyAccount;
 import com.krawczak.netflixPayments.domain.dotPayApi.PaymentInformation;
 import com.krawczak.netflixPayments.domain.dotPayApi.paymentInformation.Payer;
 import com.krawczak.netflixPayments.service.dotPayServices.CreateJson;
+import com.krawczak.netflixPayments.service.dotPayServices.GetDotPayCredentials;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -24,24 +25,27 @@ public class DotPayApiMapper {
     @Autowired
     CreateJson createJson;
 
+    @Autowired
+    GetDotPayCredentials getDotPayCredentials;
+
     private ObjectMapper objectMapper = new ObjectMapper();
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public MyAccount parseMyAccount() throws UnirestException, JsonProcessingException {
         HttpResponse<String> response = Unirest.get("https://ssl.dotpay.pl/test_seller/api/v1/accounts")
-                .basicAuth("mikolak25@gmail.com", "Mikolaj2511").asString();
+                .basicAuth(getDotPayCredentials.findCredentialsById("dot").getUsername(), getDotPayCredentials.findCredentialsById("dot").getPassword())
+                .asString();
         return objectMapper.readValue(response.getBody(), MyAccount.class);
     }
 
     public PaymentInformation parsePayment(String amount, String description, String control, Payer payer) throws UnirestException, JsonProcessingException {
         HttpResponse<String> response = Unirest.post("https://ssl.dotpay.pl/test_seller/api/v1/accounts/776768/payment_links/")
-                .basicAuth("mikolak25@gmail.com", "Mikolaj2511")
+                .basicAuth(getDotPayCredentials.findCredentialsById("dot").getUsername(), getDotPayCredentials.findCredentialsById("dot").getPassword())
                 .header("Content-type", "application/json")
                 .header("Accept", "application/json")
                 .header("Host", "ssl.dotpay.pl")
                 .body(createJson.jsonForCreatingPaymentLink(amount, description, control, payer).toString())
                 .asString();
-        logger.info(response.getBody());
         return objectMapper.readValue(response.getBody(), PaymentInformation.class);
     }
 }

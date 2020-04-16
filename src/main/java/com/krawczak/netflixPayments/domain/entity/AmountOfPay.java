@@ -12,7 +12,6 @@ import javax.persistence.Table;
 public class AmountOfPay {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "amount_of_pay_id")
   private Long id;
 

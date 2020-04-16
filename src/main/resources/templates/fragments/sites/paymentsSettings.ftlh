@@ -1,0 +1,1 @@
+Wysokość płatności: ${amount}
