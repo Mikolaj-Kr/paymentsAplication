@@ -59,19 +59,12 @@ public class PaymentsController {
     }
 
     @PostMapping("/pay-dot")
-    public ResponseEntity<String> postPayByDotPay(@RequestParam(value = "username") String username, @RequestParam(value = "paymentId") String paymentId) throws JsonProcessingException, UnirestException, NoSuchAlgorithmException {
-        return new ResponseEntity<>(dotPayService.createPaymentLink(username, paymentId), HttpStatus.OK);
+    public ResponseEntity<String> postPayByDotPay(@RequestParam(value = "username") String username, @RequestParam(value = "paymentId") String paymentId, HttpServletResponse response) throws IOException, UnirestException, NoSuchAlgorithmException {
+        response.sendRedirect(dotPayService.createPaymentLink(username, paymentId));
+        logger.info( username + "start to pay by DotPay for payment: " + paymentId);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
-//    @PostMapping("/pay-test")
-//    public ResponseEntity<String> postPayTest() throws JsonProcessingException, UnirestException, NoSuchAlgorithmException {
-//        Payer payer = new Payer();
-//        payer.setEmail("test");
-//        payer.setFirstName("test");
-//        payer.setLastName("test");
-//        payer.setPhone("test");
-//        return new ResponseEntity<>(dotPayService.createPaymentLink("test","test",payer), HttpStatus.OK);
-//    }
 
     @PostMapping("/pay-urlc")
     public ResponseEntity<String> postUrlc(){

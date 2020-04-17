@@ -37,7 +37,7 @@ public class PaymentsSettingsController {
         if(NumberUtils.isDigits(amount)) {
             amountOfPayService.setAmountOfPay(Long.valueOf(amount));
         }
-        response.sendRedirect("/pay-payment-settings");
+        response.sendRedirect("/pay-payments-settings");
         return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 }

@@ -9,6 +9,7 @@ import com.krawczak.netflixPayments.domain.dotPayApi.paymentInformation.Payer;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.mapper.apiMapper.DotPayApiMapper;
+import com.krawczak.netflixPayments.service.AmountOfPayService;
 import com.krawczak.netflixPayments.service.PaymentService;
 import com.krawczak.netflixPayments.service.UserService;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -43,6 +44,9 @@ public class DotPayService {
     @Autowired
     PaymentService paymentService;
 
+    @Autowired
+    AmountOfPayService amountOfPayService;
+
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -59,7 +63,7 @@ public class DotPayService {
         payer.setFirstName(users.getName());
         payer.setLastName(users.getSurname());
 
-        String urlWithoutChk = dotPayApiMapper.parsePayment("12", description, paymentId, payer).getPaymentUrl();
+        String urlWithoutChk = dotPayApiMapper.parsePayment(amountOfPayService.getAmountOfPay().toString(), description, paymentId, payer).getPaymentUrl();
 
         String[] urlArray = urlWithoutChk.split("=");
         String pid = urlArray[1];
