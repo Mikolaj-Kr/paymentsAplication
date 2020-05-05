@@ -19,11 +19,15 @@ import java.util.Map;
 @Controller
 public class PaymentsSettingsController {
 
-    @Autowired
-    GetModelAndView getModelAndView;
+    private final GetModelAndView getModelAndView;
+
+    private final AmountOfPayService amountOfPayService;
 
     @Autowired
-    AmountOfPayService amountOfPayService;
+    public PaymentsSettingsController(GetModelAndView getModelAndView, AmountOfPayService amountOfPayService) {
+        this.getModelAndView = getModelAndView;
+        this.amountOfPayService = amountOfPayService;
+    }
 
     @GetMapping("/pay-payments-settings")
     public ModelAndView getPaymentSettings() {

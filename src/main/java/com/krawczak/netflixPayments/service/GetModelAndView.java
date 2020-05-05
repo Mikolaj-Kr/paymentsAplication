@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class GetModelAndView {
 
+  private final UserService userService;
+
   @Autowired
-  UserService userService;
+  public GetModelAndView(UserService userService) {
+    this.userService = userService;
+  }
 
   public Map<String, Object> getModelAndViewParams(String page) {
     Map<String, Object> params = new HashMap<>();

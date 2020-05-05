@@ -1,10 +1,7 @@
 package com.krawczak.netflixPayments.controller.usersControllers;
 
-import com.krawczak.netflixPayments.configuration.PasswordEncoder;
 import com.krawczak.netflixPayments.service.ChangePasswordService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
-import com.krawczak.netflixPayments.service.UserService;
-import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +21,17 @@ import java.util.Map;
 @Controller
 public class AccountController {
 
-    @Autowired
-    GetModelAndView getModelAndView;
+    private final GetModelAndView getModelAndView;
 
-    @Autowired
-    ChangePasswordService changePasswordService;
+    private final ChangePasswordService changePasswordService;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public AccountController(GetModelAndView getModelAndView, ChangePasswordService changePasswordService) {
+        this.getModelAndView = getModelAndView;
+        this.changePasswordService = changePasswordService;
+    }
 
     @GetMapping("/pay-account")
     public ModelAndView getAccountController() {

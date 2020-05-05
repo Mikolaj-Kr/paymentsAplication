@@ -14,6 +14,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.AccessType;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
@@ -21,29 +22,27 @@ import java.security.NoSuchAlgorithmException;
 @Service
 public class DotPayService {
 
-    @Autowired
-    DotPayApiParser dotPayApiParser;
+    private final DotPayApiParser dotPayApiParser;
 
-    @Autowired
-    CreateJson createJson;
+    private final CreateShaHash createShaHash;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
-    @Autowired
-    CreateShaHash createShaHash;
+    private final PaymentService paymentService;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    PaymentService paymentService;
-
-    @Autowired
-    AmountOfPayService amountOfPayService;
+    private final AmountOfPayService amountOfPayService;
 
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public DotPayService(DotPayApiParser dotPayApiParser, CreateJson createJson, PasswordEncoder passwordEncoder, CreateShaHash createShaHash, UserService userService, PaymentService paymentService, AmountOfPayService amountOfPayService) {
+        this.dotPayApiParser = dotPayApiParser;
+        this.createShaHash = createShaHash;
+        this.userService = userService;
+        this.paymentService = paymentService;
+        this.amountOfPayService = amountOfPayService;
+    }
 
     public MyAccount getAccountInfoFromDotPay() throws JsonProcessingException, UnirestException {
         return dotPayApiParser.parseMyAccount();

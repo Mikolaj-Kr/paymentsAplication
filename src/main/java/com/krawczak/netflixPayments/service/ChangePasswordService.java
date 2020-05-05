@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChangePasswordService {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    BCryptPasswordEncoder passwordEncoder;
+    public ChangePasswordService(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public int changeUserPassword(String username, String oldPassword, String password, String password2){
         if(passwordEncoder.matches(oldPassword, userService.findUserByUsername(username).getPassword()) && password.equals(password2)){

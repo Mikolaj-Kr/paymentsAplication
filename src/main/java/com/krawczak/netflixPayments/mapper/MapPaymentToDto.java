@@ -9,11 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class MapPaymentToDto {
 
-  @Autowired
-  MapUserToDto mapUserToDto;
+  private final MapUserToDto mapUserToDto;
+
+  private final GetPolishNames getPolishNames;
 
   @Autowired
-  GetPolishNames getPolishNames;
+  public MapPaymentToDto(MapUserToDto mapUserToDto, GetPolishNames getPolishNames) {
+    this.mapUserToDto = mapUserToDto;
+
+    this.getPolishNames = getPolishNames;
+  }
 
   public PaymentDto paymentDto(Payment payment) {
     PaymentDto paymentDto = new PaymentDto();

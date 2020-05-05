@@ -3,7 +3,6 @@ package com.krawczak.netflixPayments.controller.adminContollers;
 import com.krawczak.netflixPayments.service.AuthoritiesService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.UserService;
-import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +20,18 @@ import java.util.Map;
 @Controller
 public class UsersController {
 
-    @Autowired
-    GetModelAndView getModelAndView;
+    private final GetModelAndView getModelAndView;
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    AuthoritiesService authoritiesService;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public UsersController(GetModelAndView getModelAndView, UserService userService, AuthoritiesService authoritiesService) {
+        this.getModelAndView = getModelAndView;
+        this.userService = userService;
+    }
 
 
     @RequestMapping("/pay-users")

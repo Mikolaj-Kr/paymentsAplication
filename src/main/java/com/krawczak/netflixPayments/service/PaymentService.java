@@ -11,26 +11,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PaymentService {
 
-    @Autowired
-    PaymentsRepository paymentsRepository;
+    private final PaymentsRepository paymentsRepository;
 
-    @Autowired
-    MapPaymentToDto mapPaymentToDto;
+    private final MapPaymentToDto mapPaymentToDto;
 
-    @Autowired
-    GetPolishNames getPolishNames;
+    private final UserService userService;
 
-    @Autowired
-    UserService userService;
 
-    @Autowired
-    MapUserToDto mapUserToDto;
+    public PaymentService(PaymentsRepository paymentsRepository, MapPaymentToDto mapPaymentToDto, GetPolishNames getPolishNames, UserService userService, MapUserToDto mapUserToDto) {
+        this.paymentsRepository = paymentsRepository;
+        this.mapPaymentToDto = mapPaymentToDto;
+        this.userService = userService;
+    }
 
     public List<PaymentDto> getUserPayments(String username) {
         List<PaymentDto> paymentsList = new ArrayList<>();

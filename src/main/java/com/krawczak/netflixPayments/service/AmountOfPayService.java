@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AmountOfPayService {
 
+    private final AmountOfPayRepository amountOfPayRepository;
+
     @Autowired
-    AmountOfPayRepository amountOfPayRepository;
+    public AmountOfPayService(AmountOfPayRepository amountOfPayRepository) {
+        this.amountOfPayRepository = amountOfPayRepository;
+    }
 
     public void setAmountOfPay(Long amount){
         AmountOfPay amountOfPay = new AmountOfPay(1L, amount);

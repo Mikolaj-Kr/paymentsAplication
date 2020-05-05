@@ -7,7 +7,6 @@ import com.krawczak.netflixPayments.service.GetPolishNames;
 import com.krawczak.netflixPayments.service.PaymentService;
 import com.krawczak.netflixPayments.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,17 +16,15 @@ public class MailService {
 
     private JavaMailSender javaMailSender;
 
-    @Autowired
-    PaymentService paymentService;
+    private final PaymentService paymentService;
+
+    private final UserService userService;
 
     @Autowired
-    GetPolishNames getPolishNames;
-
-    @Autowired
-    UserService userService;
-
-    public MailService(JavaMailSender javaMailSender) {
+    public MailService(JavaMailSender javaMailSender, PaymentService paymentService, GetPolishNames getPolishNames, UserService userService) {
         this.javaMailSender = javaMailSender;
+        this.paymentService = paymentService;
+        this.userService = userService;
     }
 
     public void sendEmail(String to, String content, String subject) {

@@ -3,8 +3,6 @@ package com.krawczak.netflixPayments.service;
 import com.krawczak.netflixPayments.configuration.PasswordEncoder;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.email.MailService;
-import com.sun.xml.fastinfoset.util.CharArray;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +13,20 @@ import java.util.Random;
 @Service
 public class ForgetPasswordService {
 
-    @Autowired
-    MailService mailService;
+    private final MailService mailService;
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public ForgetPasswordService(MailService mailService, UserService userService, PasswordEncoder passwordEncoder) {
+        this.mailService = mailService;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public void forgetPassword(String username) {
         Random random = new Random();

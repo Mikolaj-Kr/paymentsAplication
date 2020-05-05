@@ -22,14 +22,19 @@ import org.springframework.web.context.WebApplicationContext;
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class DotPayApiParser {
 
-    @Autowired
-    CreateJson createJson;
+    private final CreateJson createJson;
 
-    @Autowired
-    GetDotPayCredentials getDotPayCredentials;
+    private final GetDotPayCredentials getDotPayCredentials;
 
     private ObjectMapper objectMapper = new ObjectMapper();
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public DotPayApiParser(CreateJson createJson, GetDotPayCredentials getDotPayCredentials) {
+        this.createJson = createJson;
+        this.getDotPayCredentials = getDotPayCredentials;
+    }
 
     public MyAccount parseMyAccount() throws UnirestException, JsonProcessingException {
         HttpResponse<String> response = Unirest.get("https://ssl.dotpay.pl/test_seller/api/v1/accounts")

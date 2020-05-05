@@ -1,6 +1,5 @@
 package com.krawczak.netflixPayments.controller.usersControllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.math.NumberUtils;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
@@ -9,10 +8,8 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
-import com.krawczak.netflixPayments.service.UserService;
 import com.krawczak.netflixPayments.service.dotPayServices.DotPayService;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import freemarker.template.utility.NumberUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,23 +21,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class PaymentsController {
 
-    @Autowired
-    GetModelAndView getModelAndView;
+    private final GetModelAndView getModelAndView;
 
-    @Autowired
-    PaymentService paymentService;
+    private final PaymentService paymentService;
 
-    @Autowired
-    DotPayService dotPayService;
+    private final DotPayService dotPayService;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public PaymentsController(GetModelAndView getModelAndView, PaymentService paymentService, DotPayService dotPayService) {
+        this.getModelAndView = getModelAndView;
+        this.paymentService = paymentService;
+        this.dotPayService = dotPayService;
+    }
 
     @GetMapping("/pay-payments")
     public ModelAndView getPaymentsController() {

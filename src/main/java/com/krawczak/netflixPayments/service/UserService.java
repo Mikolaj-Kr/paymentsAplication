@@ -4,7 +4,6 @@ import com.krawczak.netflixPayments.domain.dto.UsersDto;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.mapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,17 +12,20 @@ import java.util.List;
 @Service
 public class UserService {
 
-  @Autowired
-  UserRepository userRepository;
+  private final UserRepository userRepository;
 
-  @Autowired
-  MapUserToDto mapUserToDto;
+  private final MapUserToDto mapUserToDto;
 
-  @Autowired
-  AuthoritiesService authoritiesService;
+  private final AuthoritiesService authoritiesService;
 
-  @Autowired
-  PaymentService paymentService;
+  private final PaymentService paymentService;
+
+  public UserService(UserRepository userRepository, MapUserToDto mapUserToDto, AuthoritiesService authoritiesService, PaymentService paymentService) {
+    this.userRepository = userRepository;
+    this.mapUserToDto = mapUserToDto;
+    this.authoritiesService = authoritiesService;
+    this.paymentService = paymentService;
+  }
 
   public Users findUserByUsername(String username) {
     return userRepository.findUsersByUsername(username);
