@@ -3,8 +3,8 @@ package com.krawczak.netflixPayments.service;
 import com.krawczak.netflixPayments.domain.dto.PaymentDto;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
-import com.krawczak.netflixPayments.mapper.databaseMapper.MapPaymentToDto;
-import com.krawczak.netflixPayments.mapper.databaseMapper.MapUserToDto;
+import com.krawczak.netflixPayments.mapper.MapPaymentToDto;
+import com.krawczak.netflixPayments.mapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.PaymentsRepository;
 
 import java.util.ArrayList;

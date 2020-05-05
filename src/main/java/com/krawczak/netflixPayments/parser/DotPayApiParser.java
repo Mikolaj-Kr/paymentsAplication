@@ -1,4 +1,4 @@
-package com.krawczak.netflixPayments.mapper.apiMapper;
+package com.krawczak.netflixPayments.parser;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class DotPayApiMapper {
+public class DotPayApiParser {
 
     @Autowired
     CreateJson createJson;
