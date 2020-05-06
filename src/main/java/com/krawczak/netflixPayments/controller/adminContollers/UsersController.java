@@ -28,7 +28,7 @@ public class UsersController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public UsersController(GetModelAndView getModelAndView, UserService userService, AuthoritiesService authoritiesService) {
+    public UsersController(GetModelAndView getModelAndView, UserService userService) {
         this.getModelAndView = getModelAndView;
         this.userService = userService;
     }

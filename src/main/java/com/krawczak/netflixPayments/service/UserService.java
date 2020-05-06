@@ -3,7 +3,10 @@ package com.krawczak.netflixPayments.service;
 import com.krawczak.netflixPayments.domain.dto.UsersDto;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.mapper.MapUserToDto;
+import com.krawczak.netflixPayments.repositories.AuthoritiesRepository;
+import com.krawczak.netflixPayments.repositories.PaymentsRepository;
 import com.krawczak.netflixPayments.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,15 +19,16 @@ public class UserService {
 
   private final MapUserToDto mapUserToDto;
 
-  private final AuthoritiesService authoritiesService;
+  private final AuthoritiesRepository authoritiesRepository;
 
-  private final PaymentService paymentService;
+  private final PaymentsRepository paymentsRepository;
 
-  public UserService(UserRepository userRepository, MapUserToDto mapUserToDto, AuthoritiesService authoritiesService, PaymentService paymentService) {
+  @Autowired
+  public UserService(UserRepository userRepository, MapUserToDto mapUserToDto,AuthoritiesRepository authoritiesRepository, PaymentsRepository paymentsRepository) {
     this.userRepository = userRepository;
     this.mapUserToDto = mapUserToDto;
-    this.authoritiesService = authoritiesService;
-    this.paymentService = paymentService;
+    this.authoritiesRepository = authoritiesRepository;
+    this.paymentsRepository = paymentsRepository;
   }
 
   public Users findUserByUsername(String username) {
@@ -48,8 +52,8 @@ public class UserService {
   }
 
   public void deleteUser(String username) {
-    authoritiesService.deleteAuthorities(findUserByUsername(username));
-    paymentService.deleteUserPayments(findUserByUsername(username));
+    authoritiesRepository.delete(authoritiesRepository.findAuthoritiesByUsers(findUserByUsername(username)));
+    paymentsRepository.findPaymentByUsersOrderByDateOfPayment(findUserByUsername(username)).forEach(paymentsRepository::delete);
     userRepository.delete(findUserByUsername(username));
   }
 }

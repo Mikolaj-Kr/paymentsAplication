@@ -3,7 +3,8 @@ package com.krawczak.netflixPayments.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GetPolishNames {
+public class
+GetPolishNames {
 
     public String getMonth(int numberOfMonth) {
 

@@ -24,6 +24,7 @@ public class CreateJson {
         json.put("description", description);
         json.put("control", control);
         json.put("language", "pl");
+        json.put("redirection_type", 0);
         json.put("ignore_last_payment_channel", 1);
         json.put("url", "https://dotpaytest.herokuapp.com/pay-payments");
         json.put("urlc", "https://dotpaytest.herokuapp.com/pay-urlc");

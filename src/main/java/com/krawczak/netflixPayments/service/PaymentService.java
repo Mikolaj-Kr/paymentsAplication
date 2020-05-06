@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.krawczak.netflixPayments.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,18 +22,18 @@ public class PaymentService {
 
     private final MapPaymentToDto mapPaymentToDto;
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
-
-    public PaymentService(PaymentsRepository paymentsRepository, MapPaymentToDto mapPaymentToDto, GetPolishNames getPolishNames, UserService userService, MapUserToDto mapUserToDto) {
+    @Autowired
+    public PaymentService(PaymentsRepository paymentsRepository, MapPaymentToDto mapPaymentToDto, UserRepository userRepository) {
         this.paymentsRepository = paymentsRepository;
         this.mapPaymentToDto = mapPaymentToDto;
-        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     public List<PaymentDto> getUserPayments(String username) {
         List<PaymentDto> paymentsList = new ArrayList<>();
-        paymentsRepository.findPaymentByUsersOrderByDateOfPayment(userService.findUserByUsername(username))
+        paymentsRepository.findPaymentByUsersOrderByDateOfPayment(userRepository.findUsersByUsername(username))
                 .forEach(payment -> paymentsList.add(mapPaymentToDto.paymentDto(payment)));
         Collections.reverse(paymentsList);
         return paymentsList;
@@ -45,7 +47,7 @@ public class PaymentService {
 
     public PaymentDto getLastPaidUserPayment(String username){
         List<PaymentDto> paymentList = new ArrayList<>();
-        paymentsRepository.findPaymentByUsersAndStatusOrderByDateOfPayment(userService.findUserByUsername(username), "paid")
+        paymentsRepository.findPaymentByUsersAndStatusOrderByDateOfPayment(userRepository.findUsersByUsername(username), "paid")
                       .forEach(payment -> paymentList.add(mapPaymentToDto.paymentDto(payment)));
         return paymentList.get(paymentList.size()-1);
     }
@@ -80,13 +82,13 @@ public class PaymentService {
       nextPayment.setAmountOfPayment(10L);
       nextPayment.setStatus("unpaid");
       nextPayment.setDateOfPayment(payment.getDateOfPayment().plusMonths(1));
-      nextPayment.setUsers(userService.findUserByUsername(username));
+      nextPayment.setUsers(userRepository.findUsersByUsername(username));
       savePayment(nextPayment);
     }
 
     public void deleteUserPayments(Users users){
         List<Payment> paymentList = paymentsRepository.findPaymentByUsersOrderByDateOfPayment(users);
-        paymentList.forEach(payment -> paymentsRepository.delete(payment));
+        paymentList.forEach(paymentsRepository::delete);
     }
 
     public void finishPayment(Long paymentId){
