@@ -58,6 +58,12 @@ public class PaymentsController {
         return new ModelAndView("main-site", params);
     }
 
+    @PostMapping("/pay-after-pay")
+    public ResponseEntity<String> postAfterPay(@RequestParam(value = "status") String status, HttpServletResponse response) throws IOException {
+        response.sendRedirect("/pay-payments");
+        return new ResponseEntity<>("ok", HttpStatus.OK);
+    }
+
     @PostMapping("/pay-dot")
     public ResponseEntity<String> postPayByDotPay(@RequestParam(value = "username") String username, @RequestParam(value = "paymentId") String paymentId, HttpServletResponse response) throws IOException, UnirestException, NoSuchAlgorithmException {
         response.sendRedirect(dotPayService.createPaymentLink(username, paymentId));
