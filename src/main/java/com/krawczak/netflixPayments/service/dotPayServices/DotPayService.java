@@ -64,5 +64,14 @@ public class DotPayService {
         return urlWithoutChk + "&chk=" + createShaHash.creatChk(pid);
     }
 
+    public void changePaymentStatus(String paymentId, String status){
+        Payment payment = paymentService.findPaymentById(Long.valueOf(paymentId));
+        if ((payment.getStatus().equals("unpaid") || payment.getStatus().equals("inProgress")) && status.equals("completed")) {
+                payment.setStatus("paid");
+                paymentService.savePayment(payment);
+        }
+    }
+
+
 
 }

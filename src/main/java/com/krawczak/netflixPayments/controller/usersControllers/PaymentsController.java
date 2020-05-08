@@ -73,8 +73,8 @@ public class PaymentsController {
 
 
     @PostMapping("/pay-urlc")
-    public ResponseEntity<String> postUrlc(){
-
+    public ResponseEntity<String> postUrlc(@RequestParam(value = "control") String control, @RequestParam(value = "operation_status") String status ){
+        dotPayService.changePaymentStatus(control, status);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
