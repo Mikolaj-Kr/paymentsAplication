@@ -16,7 +16,7 @@
 >  Page where the user can log in or create an account. 
 
 ### Payments view
-![User view](./src/main/resources/static/img/[payments.png) 
+![User view](./src/main/resources/static/img/payments.png) 
 > After login user can check his payments and make new payment.
 
 ### Payment view
@@ -25,7 +25,7 @@
 
 ### Pay by DotPay
 ![User View](./src/main/resources/static/img/DotPay.png) 
-![User View](./src/main/resources/static/img/DotPay.png)
+![User View](./src/main/resources/static/img/payments.png)
 >This is a test payment in the DotPay system. After the acceptation, the application will show information about the next month paid. 
 
 ## Technologies
