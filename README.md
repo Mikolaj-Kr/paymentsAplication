@@ -9,7 +9,7 @@
 * [Inspiration](#inspiration)
 
 ## General info
->The main feature of the application is ability to check your past payments and make a new payments (for new month). Admin user can check who has already paid and who didn’t. The application simplifies contributory payments for the Netflix, by automation off this process and make easier- we can use DotPay. Here https://dotpaytest.herokuapp.com/pay-main you can try how does it work without any costs.  
+>The main feature of the application is ability to check your past payments and make a new payments (for new month). Admin user can check who has already paid and who didn’t. The application simplifies contributory payments for the Netflix, by automation off this process and make easier- we can use DotPay. Here https://dotpaytest.herokuapp.com/pay-main you can try how  it works without any costs.  
 ## Features
 ### Login page
 ![Guest view](./src/main/resources/static/img/login.png) 
