@@ -25,7 +25,7 @@
 
 ### Pay by DotPay
 ![User View](./src/main/resources/static/img/DotPay.png) 
-![User View](./src/main/resources/static/img/payments.png)
+![User View](./src/main/resources/static/img/paymentsA.png)
 >This is a test payment in the DotPay system. After the acceptation, the application will show information about the next month paid. 
 
 ## Technologies
