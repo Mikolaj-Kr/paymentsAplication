@@ -93,7 +93,7 @@ public class RegistrationController {
     users.setSurname(surname);
     users.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(password));
     users.setUsername(username);
-    users.setEnabled(0);
+    users.setEnabled(1);
     users.setChangePasswordCode(passwordEncoder.bCryptPasswordEncoder().encode(String.valueOf(random.nextLong())));
     authority.setAuthority("USER");
     authorities.setUsers(users);
@@ -122,7 +122,7 @@ public class RegistrationController {
 
     logger.info("User " + username + "Added to DB");
     response.sendRedirect("/pay-registration-success");
-    mailService.sendEmail(username, "Witaj " + username +" Wejdź w link aby aktywować konto    https://dotpaytest.herokuapp.com/pay-registration-confirm?username=" + username, "Potwierdzenie rejestracji w serwisie płatności");
+//    mailService.sendEmail(username, "Witaj " + username +" Wejdź w link aby aktywować konto    https://dotpaytest.herokuapp.com/pay-registration-confirm?username=" + username, "Potwierdzenie rejestracji w serwisie płatności");
     return new ResponseEntity<>(name, HttpStatus.OK);
   }
 
