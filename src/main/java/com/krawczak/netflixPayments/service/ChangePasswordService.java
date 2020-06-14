@@ -18,13 +18,13 @@ public class ChangePasswordService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public int changeUserPassword(String username, String oldPassword, String password, String password2){
-        if(passwordEncoder.matches(oldPassword, userService.findUserByUsername(username).getPassword()) && password.equals(password2)){
+    public int changeUserPassword(String username, String oldPassword, String password, String password2) {
+        if (passwordEncoder.matches(oldPassword, userService.findUserByUsername(username).getPassword()) && password.equals(password2)) {
             Users users = userService.findUserByUsername(username);
             users.setPassword(passwordEncoder.encode(password));
             userService.saveUser(users);
             return 1;
-        } else if(password.equals(password2)){
+        } else if (password.equals(password2)) {
             return 2;
         } else {
             return 3;

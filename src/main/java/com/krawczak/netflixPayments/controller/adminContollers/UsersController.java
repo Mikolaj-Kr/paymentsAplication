@@ -1,6 +1,5 @@
 package com.krawczak.netflixPayments.controller.adminContollers;
 
-import com.krawczak.netflixPayments.service.AuthoritiesService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.UserService;
 import org.slf4j.Logger;
@@ -35,14 +34,14 @@ public class UsersController {
 
 
     @RequestMapping("/pay-users")
-    public ModelAndView getUsers(){
+    public ModelAndView getUsers() {
         Map<String, Object> params = getModelAndView.getModelAndViewParams("users");
         params.put("usersList", userService.findAllUsers());
         return new ModelAndView("main-site", params);
     }
 
     @GetMapping("/pay-users-delete-user")
-    public ModelAndView getDeleteUserSecondStep(HttpServletRequest request){
+    public ModelAndView getDeleteUserSecondStep(HttpServletRequest request) {
         Map<String, Object> params = getModelAndView.getModelAndViewParams("deleteUser");
         params.put("userToDelete", userService.findUserByUsername(request.getParameter("username")));
         return new ModelAndView("main-site", params);

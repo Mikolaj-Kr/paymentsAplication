@@ -7,13 +7,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MapUserToDto {
 
-  public UsersDto userToDto(Users users) {
-    UsersDto usersDto = new UsersDto();
+    public UsersDto userToDto(Users users) {
+        UsersDto usersDto = new UsersDto();
 
-    usersDto.setUsername(users.getUsername());
-    usersDto.setName(users.getName());
-    usersDto.setSurname(users.getSurname());
-
-    return usersDto;
-  }
+        usersDto.setUsername(users.getUsername());
+        usersDto.setName(users.getName());
+        usersDto.setSurname(users.getSurname());
+        return usersDto;
+    }
 }

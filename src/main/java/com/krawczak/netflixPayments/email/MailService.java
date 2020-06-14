@@ -41,7 +41,7 @@ public class MailService {
         javaMailSender.send(mail);
     }
 
-    public void remandingMail(String username){
+    public void remandingMail(String username) {
         String content = userService.findUserByUsername(username).getName() + " netflixa masz opłaconego do: " + paymentService.getLastPaidUserPayment(username).getMonthOfPayment() + "(włącznie). Po szczegóły zapraszam na https://paymentmk.herokuapp.com/pay-payments";
         String subject = "Netflix info";
         sendEmail(username, content, subject);

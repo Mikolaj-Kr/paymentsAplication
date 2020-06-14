@@ -4,7 +4,6 @@ import com.krawczak.netflixPayments.domain.dto.PaymentDto;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.mapper.MapPaymentToDto;
-import com.krawczak.netflixPayments.mapper.MapUserToDto;
 import com.krawczak.netflixPayments.repositories.PaymentsRepository;
 
 import java.util.ArrayList;
@@ -39,17 +38,17 @@ public class PaymentService {
         return paymentsList;
     }
 
-    public Payment getLastUserPayment(String username){
-      List<PaymentDto> paymentsList = getUserPayments(username);
-      Collections.reverse(paymentsList);
-      return findPaymentById(paymentsList.get(paymentsList.size()-1).getId());
+    public Payment getLastUserPayment(String username) {
+        List<PaymentDto> paymentsList = getUserPayments(username);
+        Collections.reverse(paymentsList);
+        return findPaymentById(paymentsList.get(paymentsList.size() - 1).getId());
     }
 
-    public PaymentDto getLastPaidUserPayment(String username){
+    public PaymentDto getLastPaidUserPayment(String username) {
         List<PaymentDto> paymentList = new ArrayList<>();
         paymentsRepository.findPaymentByUsersAndStatusOrderByDateOfPayment(userRepository.findUsersByUsername(username), "paid")
-                      .forEach(payment -> paymentList.add(mapPaymentToDto.paymentDto(payment)));
-        return paymentList.get(paymentList.size()-1);
+                .forEach(payment -> paymentList.add(mapPaymentToDto.paymentDto(payment)));
+        return paymentList.get(paymentList.size() - 1);
     }
 
     public Payment findPaymentById(Long id) {
@@ -64,34 +63,34 @@ public class PaymentService {
         savePayment(payment);
     }
 
-    public void changePayToPaid(Long id){
+    public void changePayToPaid(Long id) {
         Payment payment = findPaymentById(id);
         payment.setStatus("paid");
         savePayment(payment);
     }
 
-    public void changePayToUnpaid(Long id){
+    public void changePayToUnpaid(Long id) {
         Payment payment = findPaymentById(id);
         payment.setStatus("unpaid");
         savePayment(payment);
     }
 
-    public void addNewPay(String username){
-      Payment payment = getLastUserPayment(username);
-      Payment nextPayment = new Payment();
-      nextPayment.setAmountOfPayment(10L);
-      nextPayment.setStatus("unpaid");
-      nextPayment.setDateOfPayment(payment.getDateOfPayment().plusMonths(1));
-      nextPayment.setUsers(userRepository.findUsersByUsername(username));
-      savePayment(nextPayment);
+    public void addNewPay(String username) {
+        Payment payment = getLastUserPayment(username);
+        Payment nextPayment = new Payment();
+        nextPayment.setAmountOfPayment(10L);
+        nextPayment.setStatus("unpaid");
+        nextPayment.setDateOfPayment(payment.getDateOfPayment().plusMonths(1));
+        nextPayment.setUsers(userRepository.findUsersByUsername(username));
+        savePayment(nextPayment);
     }
 
-    public void deleteUserPayments(Users users){
+    public void deleteUserPayments(Users users) {
         List<Payment> paymentList = paymentsRepository.findPaymentByUsersOrderByDateOfPayment(users);
         paymentList.forEach(paymentsRepository::delete);
     }
 
-    public void finishPayment(Long paymentId){
+    public void finishPayment(Long paymentId) {
         deletePayment(findPaymentById(paymentId));
     }
 
@@ -99,7 +98,7 @@ public class PaymentService {
         paymentsRepository.save(payment);
     }
 
-    private void deletePayment(Payment payment){
+    private void deletePayment(Payment payment) {
         paymentsRepository.delete(payment);
     }
 }

@@ -1,4 +1,4 @@
 function locationReplace(page) {
-  location.replace(page);
+    location.replace(page);
 }
 

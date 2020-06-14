@@ -9,25 +9,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class MapPaymentToDto {
 
-  private final MapUserToDto mapUserToDto;
+    private final MapUserToDto mapUserToDto;
 
-  private final GetPolishNames getPolishNames;
+    private final GetPolishNames getPolishNames;
 
-  @Autowired
-  public MapPaymentToDto(MapUserToDto mapUserToDto, GetPolishNames getPolishNames) {
-    this.mapUserToDto = mapUserToDto;
+    @Autowired
+    public MapPaymentToDto(MapUserToDto mapUserToDto, GetPolishNames getPolishNames) {
+        this.mapUserToDto = mapUserToDto;
 
-    this.getPolishNames = getPolishNames;
-  }
+        this.getPolishNames = getPolishNames;
+    }
 
-  public PaymentDto paymentDto(Payment payment) {
-    PaymentDto paymentDto = new PaymentDto();
-    paymentDto.setId(payment.getId());
-    paymentDto.setAmountOfPayment(payment.getAmountOfPayment());
-    paymentDto.setDateOfPayment(payment.getDateOfPayment());
-    paymentDto.setStatus(payment.getStatus());
-    paymentDto.setMonthOfPayment(getPolishNames.getMonth(payment.getDateOfPayment().getMonth().getValue()));
-    paymentDto.setUsersDto(mapUserToDto.userToDto(payment.getUsers()));
-    return paymentDto;
-  }
+    public PaymentDto paymentDto(Payment payment) {
+        PaymentDto paymentDto = new PaymentDto();
+        paymentDto.setId(payment.getId());
+        paymentDto.setAmountOfPayment(payment.getAmountOfPayment());
+        paymentDto.setDateOfPayment(payment.getDateOfPayment());
+        paymentDto.setStatus(payment.getStatus());
+        paymentDto.setMonthOfPayment(getPolishNames.getMonth(payment.getDateOfPayment().getMonth().getValue()));
+        paymentDto.setUsersDto(mapUserToDto.userToDto(payment.getUsers()));
+        return paymentDto;
+    }
 }

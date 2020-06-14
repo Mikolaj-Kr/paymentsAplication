@@ -1,7 +1,6 @@
 package com.krawczak.netflixPayments.domain.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,70 +14,70 @@ import javax.persistence.Table;
 @Table(name = "payment")
 public class Payment {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "date_of_payment")
-  private LocalDate dateOfPayment;
+    @Column(name = "date_of_payment")
+    private LocalDate dateOfPayment;
 
-  @Column(name = "amount_of_payment")
-  private Long amountOfPayment;
+    @Column(name = "amount_of_payment")
+    private Long amountOfPayment;
 
-  @Column(name = "status")
-  private String status;
+    @Column(name = "status")
+    private String status;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  Users users;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    Users users;
 
-  public Payment(Long id, LocalDate dateOfPayment, Long amountOfPayment, Users users) {
-    this.id =  id;
-    this.dateOfPayment = dateOfPayment;
-    this.amountOfPayment = amountOfPayment;
-    this.users = users;
-  }
+    public Payment(Long id, LocalDate dateOfPayment, Long amountOfPayment, Users users) {
+        this.id = id;
+        this.dateOfPayment = dateOfPayment;
+        this.amountOfPayment = amountOfPayment;
+        this.users = users;
+    }
 
-  public Payment() {
-  }
+    public Payment() {
+    }
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public LocalDate getDateOfPayment() {
-    return dateOfPayment;
-  }
+    public LocalDate getDateOfPayment() {
+        return dateOfPayment;
+    }
 
-  public void setDateOfPayment(LocalDate dateOfPayment) {
-    this.dateOfPayment = dateOfPayment;
-  }
+    public void setDateOfPayment(LocalDate dateOfPayment) {
+        this.dateOfPayment = dateOfPayment;
+    }
 
-  public Long getAmountOfPayment() {
-    return amountOfPayment;
-  }
+    public Long getAmountOfPayment() {
+        return amountOfPayment;
+    }
 
-  public void setAmountOfPayment(Long amountOfPayment) {
-    this.amountOfPayment = amountOfPayment;
-  }
+    public void setAmountOfPayment(Long amountOfPayment) {
+        this.amountOfPayment = amountOfPayment;
+    }
 
-  public String getStatus() {
-    return status;
-  }
+    public String getStatus() {
+        return status;
+    }
 
-  public void setStatus(String status) {
-    this.status = status;
-  }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-  public Users getUsers() {
-    return users;
-  }
+    public Users getUsers() {
+        return users;
+    }
 
-  public void setUsers(Users users) {
-    this.users = users;
-  }
+    public void setUsers(Users users) {
+        this.users = users;
+    }
 }

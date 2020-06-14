@@ -46,7 +46,7 @@ public class CreateAdminUser {
 
     @RequestMapping("/pay-add-admin")
     public ModelAndView getAdmin() {
-      Random random = new Random();
+        Random random = new Random();
         Map<String, Object> params = getModelAndView.getModelAndViewParams("main");
         Users users = new Users();
         Authorities authorities = new Authorities();

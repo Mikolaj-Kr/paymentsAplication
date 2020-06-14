@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateJson {
 
-    public ObjectNode jsonForCreatingPaymentLink(String amount, String description, String control, Payer payer){
+    public ObjectNode jsonForCreatingPaymentLink(String amount, String description, String control, Payer payer) {
 
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode json = mapper.createObjectNode();
@@ -32,6 +32,4 @@ public class CreateJson {
         json.put("payer", payerJson);
         return json;
     }
-
-
 }

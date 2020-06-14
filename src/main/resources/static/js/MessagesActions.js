@@ -14,7 +14,7 @@ function checkPass() {
 }
 
 function confirmSendRemindMail() {
-  const message = document.getElementById('confirmMessage');
+    const message = document.getElementById('confirmMessage');
     message.style.color = "green";
     message.innerText = "Wysyłam..."
 }

@@ -9,106 +9,106 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import org.hibernate.validator.constraints.UniqueElements;
+
 
 @Entity
 @Table(name = "users")
 public class Users implements Serializable {
 
-  @Id
-  @NotEmpty
-  @Column(name = "username", nullable = false)
-  private String username;
+    @Id
+    @NotEmpty
+    @Column(name = "username", nullable = false)
+    private String username;
 
-  @Column(name = "name")
-  private String name;
+    @Column(name = "name")
+    private String name;
 
-  @Column(name = "surname")
-  private String surname;
+    @Column(name = "surname")
+    private String surname;
 
-  @NotEmpty
-  @Column(name = "password")
-  private String password;
+    @NotEmpty
+    @Column(name = "password")
+    private String password;
 
-  @Column(name = "enabled")
-  private int enabled;
+    @Column(name = "enabled")
+    private int enabled;
 
-  @Column(name = "changePasswordCode")
-  private String changePasswordCode;
-
-
-  @OneToMany(mappedBy = "users")
-  List<Authorities> authorities = new ArrayList<>();
+    @Column(name = "changePasswordCode")
+    private String changePasswordCode;
 
 
-  @OneToMany(mappedBy = "users")
-  List<Payment> payments = new ArrayList<>();
+    @OneToMany(mappedBy = "users")
+    List<Authorities> authorities = new ArrayList<>();
 
-  public Users() {
-  }
 
-  public String getName() {
-    return name;
-  }
+    @OneToMany(mappedBy = "users")
+    List<Payment> payments = new ArrayList<>();
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public Users() {
+    }
 
-  public String getSurname() {
-    return surname;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setSurname(String surname) {
-    this.surname = surname;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public String getUsername() {
-    return username;
-  }
+    public String getSurname() {
+        return surname;
+    }
 
-  public void setUsername(String login) {
-    this.username = login;
-  }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public String getUsername() {
+        return username;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setUsername(String login) {
+        this.username = login;
+    }
 
-  public String getChangePasswordCode() {
-    return changePasswordCode;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void setChangePasswordCode(String changePasswordCode) {
-    this.changePasswordCode = changePasswordCode;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public List<Payment> getPayments() {
-    return payments;
-  }
+    public String getChangePasswordCode() {
+        return changePasswordCode;
+    }
 
-  public void setPayments(List<Payment> payments) {
-    this.payments = payments;
-  }
+    public void setChangePasswordCode(String changePasswordCode) {
+        this.changePasswordCode = changePasswordCode;
+    }
 
-  public int getEnabled() {
-    return enabled;
-  }
+    public List<Payment> getPayments() {
+        return payments;
+    }
 
-  public void setEnabled(int enabled) {
-    this.enabled = enabled;
-  }
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
 
-  public List<Authorities> getAuthorities() {
-    return authorities;
-  }
+    public int getEnabled() {
+        return enabled;
+    }
 
-  public void setAuthorities(
-      List<Authorities> authorities) {
-    this.authorities = authorities;
-  }
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<Authorities> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(
+            List<Authorities> authorities) {
+        this.authorities = authorities;
+    }
 }

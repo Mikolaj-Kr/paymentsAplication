@@ -15,7 +15,7 @@ public class AuthorityService {
         this.authorityRepository = authorityRepository;
     }
 
-    public void saveAuthority(Authority authority){
+    public void saveAuthority(Authority authority) {
         authorityRepository.save(authority);
     }
 }

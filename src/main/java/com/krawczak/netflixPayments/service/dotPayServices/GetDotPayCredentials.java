@@ -15,7 +15,7 @@ public class GetDotPayCredentials {
         this.credentialsRepository = credentialsRepository;
     }
 
-    public Credentials findCredentialsById(String id){
+    public Credentials findCredentialsById(String id) {
         return credentialsRepository.findCredentialsById(id);
     }
 

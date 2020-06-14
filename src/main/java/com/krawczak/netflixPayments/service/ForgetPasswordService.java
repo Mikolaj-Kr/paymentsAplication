@@ -3,8 +3,6 @@ package com.krawczak.netflixPayments.service;
 import com.krawczak.netflixPayments.configuration.PasswordEncoder;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.email.MailService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,6 @@ public class ForgetPasswordService {
 
     private final PasswordEncoder passwordEncoder;
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public ForgetPasswordService(MailService mailService, UserService userService, PasswordEncoder passwordEncoder) {

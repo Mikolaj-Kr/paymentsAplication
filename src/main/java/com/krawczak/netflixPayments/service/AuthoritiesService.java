@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthoritiesService {
 
-  private final AuthoritiesRepository authoritiesRepository;
+    private final AuthoritiesRepository authoritiesRepository;
 
-  @Autowired
-  public AuthoritiesService(AuthoritiesRepository authoritiesRepository) {
-    this.authoritiesRepository = authoritiesRepository;
-  }
+    @Autowired
+    public AuthoritiesService(AuthoritiesRepository authoritiesRepository) {
+        this.authoritiesRepository = authoritiesRepository;
+    }
 
-  public void deleteAuthorities(Users users){
-    authoritiesRepository.delete(authoritiesRepository.findAuthoritiesByUsers(users));
-  }
+    public void deleteAuthorities(Users users) {
+        authoritiesRepository.delete(authoritiesRepository.findAuthoritiesByUsers(users));
+    }
 
-  public void saveAuthorities(Authorities authorities) {
-    authoritiesRepository.save(authorities);
-  }
+    public void saveAuthorities(Authorities authorities) {
+        authoritiesRepository.save(authorities);
+    }
 
 }

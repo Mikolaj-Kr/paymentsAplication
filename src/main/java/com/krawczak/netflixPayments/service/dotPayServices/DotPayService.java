@@ -2,7 +2,6 @@ package com.krawczak.netflixPayments.service.dotPayServices;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.krawczak.netflixPayments.configuration.PasswordEncoder;
-import com.krawczak.netflixPayments.domain.dotPayApi.MyAccount;
 import com.krawczak.netflixPayments.domain.dotPayApi.paymentInformation.Payer;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
@@ -14,7 +13,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.AccessType;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
@@ -42,10 +40,6 @@ public class DotPayService {
         this.userService = userService;
         this.paymentService = paymentService;
         this.amountOfPayService = amountOfPayService;
-    }
-
-    public MyAccount getAccountInfoFromDotPay() throws JsonProcessingException, UnirestException {
-        return dotPayApiParser.parseMyAccount();
     }
 
     public String createPaymentLink(String username, String paymentId) throws JsonProcessingException, UnirestException, NoSuchAlgorithmException {

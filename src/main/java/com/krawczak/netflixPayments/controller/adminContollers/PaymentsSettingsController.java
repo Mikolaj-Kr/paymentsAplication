@@ -38,7 +38,7 @@ public class PaymentsSettingsController {
 
     @PostMapping("/pay-change-amount")
     public ResponseEntity<String> postChangeAmount(@RequestParam(value = "amount") String amount, HttpServletResponse response) throws IOException {
-        if(NumberUtils.isDigits(amount)) {
+        if (NumberUtils.isDigits(amount)) {
             amountOfPayService.setAmountOfPay(Long.valueOf(amount));
         }
         response.sendRedirect("/pay-payments-settings");

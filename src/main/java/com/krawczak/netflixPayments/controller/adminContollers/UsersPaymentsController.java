@@ -40,10 +40,10 @@ public class UsersPaymentsController {
     }
 
     @RequestMapping("/pay-users-payments")
-    public ModelAndView getUsersPayments(HttpServletRequest request){
+    public ModelAndView getUsersPayments(HttpServletRequest request) {
         Map<String, Object> params = getModelAndView.getModelAndViewParams("userPayments");
         String username = request.getParameter("username");
-        params.put("paymentList",paymentService.getUserPayments(username));
+        params.put("paymentList", paymentService.getUserPayments(username));
         params.put("currentUser", userService.findUserByUsername(username));
         return new ModelAndView("main-site", params);
     }
@@ -57,7 +57,7 @@ public class UsersPaymentsController {
     }
 
     @PostMapping("/pay-user-delete-payment")
-    public ResponseEntity<String> postChangePaymentToUnpaid(@RequestParam(value = "paymentId") String paymentId, @RequestParam(value = "username") String username, HttpServletResponse response) throws IOException{
+    public ResponseEntity<String> postChangePaymentToUnpaid(@RequestParam(value = "paymentId") String paymentId, @RequestParam(value = "username") String username, HttpServletResponse response) throws IOException {
         paymentService.changePayToUnpaid(Long.valueOf(paymentId));
         logger.info("Payment with id: " + paymentId + "changed to unpaid");
         response.sendRedirect("/pay-users-payments?username=" + username);
@@ -73,7 +73,7 @@ public class UsersPaymentsController {
     }
 
     @PostMapping("/pay-user-finish-payment")
-    public ResponseEntity<String> postDeletePayment(@RequestParam(value = "paymentId") String paymentId,@RequestParam(value = "username") String username, HttpServletResponse response) throws IOException{
+    public ResponseEntity<String> postDeletePayment(@RequestParam(value = "paymentId") String paymentId, @RequestParam(value = "username") String username, HttpServletResponse response) throws IOException {
         paymentService.finishPayment(Long.valueOf(paymentId));
         logger.info("Payment: " + paymentId + "deleted");
         response.sendRedirect("pay-users-payments?username=" + username);

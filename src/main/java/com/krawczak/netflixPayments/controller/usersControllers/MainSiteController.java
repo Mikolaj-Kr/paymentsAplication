@@ -1,7 +1,6 @@
 package com.krawczak.netflixPayments.controller.usersControllers;
 
 import com.krawczak.netflixPayments.service.GetModelAndView;
-import com.krawczak.netflixPayments.service.UserService;
 
 import java.util.Map;
 
@@ -13,13 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainSiteController {
 
-    private final UserService userService;
 
     private final GetModelAndView getModelAndView;
 
     @Autowired
-    public MainSiteController(UserService userService, GetModelAndView getModelAndView) {
-        this.userService = userService;
+    public MainSiteController(GetModelAndView getModelAndView) {
         this.getModelAndView = getModelAndView;
     }
 

@@ -15,14 +15,14 @@ public class AmountOfPayService {
         this.amountOfPayRepository = amountOfPayRepository;
     }
 
-    public void setAmountOfPay(Long amount){
+    public void setAmountOfPay(Long amount) {
         AmountOfPay amountOfPay = new AmountOfPay(1L, amount);
         amountOfPayRepository.save(amountOfPay);
     }
 
-    public Long getAmountOfPay(){
+    public Long getAmountOfPay() {
         AmountOfPay amountOfPay = amountOfPayRepository.findAmountOfPayById(1L);
-        if (amountOfPay==null){
+        if (amountOfPay == null) {
             setAmountOfPay(10L);
         }
         return amountOfPayRepository.findAmountOfPayById(1L).getAmountOfPay();

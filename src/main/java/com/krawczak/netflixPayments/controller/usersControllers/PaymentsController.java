@@ -50,11 +50,11 @@ public class PaymentsController {
     }
 
     @GetMapping("/pay-pay")
-    public ModelAndView getPayController(HttpServletRequest request){
+    public ModelAndView getPayController(HttpServletRequest request) {
         String paymentId = request.getParameter("paymentId");
         Map<String, Object> params = getModelAndView("payInfo");
-        if(NumberUtils.isDigits(paymentId))
-        params.put("paymentId", paymentId);
+        if (NumberUtils.isDigits(paymentId))
+            params.put("paymentId", paymentId);
         return new ModelAndView("main-site", params);
     }
 
@@ -67,13 +67,13 @@ public class PaymentsController {
     @PostMapping("/pay-dot")
     public ResponseEntity<String> postPayByDotPay(@RequestParam(value = "username") String username, @RequestParam(value = "paymentId") String paymentId, HttpServletResponse response) throws IOException, UnirestException, NoSuchAlgorithmException {
         response.sendRedirect(dotPayService.createPaymentLink(username, paymentId));
-        logger.info( username + "start to pay by DotPay for payment: " + paymentId);
+        logger.info(username + "start to pay by DotPay for payment: " + paymentId);
         return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
 
     @PostMapping("/pay-urlc")
-    public ResponseEntity<String> postUrlc(@RequestParam(value = "control") String control, @RequestParam(value = "operation_status") String status ){
+    public ResponseEntity<String> postUrlc(@RequestParam(value = "control") String control, @RequestParam(value = "operation_status") String status) {
         dotPayService.changePaymentStatus(control, status);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
@@ -97,5 +97,4 @@ public class PaymentsController {
     private Map<String, Object> getModelAndView(String page) {
         return getModelAndView.getModelAndViewParams(page);
     }
-
 }

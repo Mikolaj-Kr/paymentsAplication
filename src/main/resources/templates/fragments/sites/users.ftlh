@@ -14,9 +14,11 @@
                     <th scope="row"> ${user.name} ${user.surname}  </th>
                     <td> ${user.username} </td>
                     <td>
-                        <a href="/pay-users-payments?username=${user.username}"> <button class="btn-dark btn-sm"> Zobacz Płatności </button> </a>
+                        <a href="/pay-users-payments?username=${user.username}">
+                            <button class="btn-dark btn-sm"> Zobacz Płatności</button>
+                        </a>
                         <form id="delete user" action="/pay-user-delete-user" method="post">
-                        <input type="hidden" name="username" value="${user.username}">
+                            <input type="hidden" name="username" value="${user.username}">
                             <button class="btn-danger btn-sm">Usuń użytkownika</button>
                         </form>
                     </td>
