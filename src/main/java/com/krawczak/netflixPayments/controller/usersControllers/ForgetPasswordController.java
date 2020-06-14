@@ -1,13 +1,9 @@
 package com.krawczak.netflixPayments.controller.usersControllers;
 
 import com.krawczak.netflixPayments.configuration.PasswordEncoder;
-import com.krawczak.netflixPayments.domain.entity.Users;
-import com.krawczak.netflixPayments.email.MailService;
 import com.krawczak.netflixPayments.service.ForgetPasswordService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.UserService;
-import org.apache.catalina.User;
-import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,32 +12,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class ForgetPasswordController {
 
-    @Autowired
-    UserService userService;
+    private final GetModelAndView getModelAndView;
 
-    @Autowired
-    GetModelAndView getModelAndView;
+    private final ForgetPasswordService forgetPasswordService;
 
-    @Autowired
-    ForgetPasswordService forgetPasswordService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public ForgetPasswordController(UserService userService, GetModelAndView getModelAndView, ForgetPasswordService forgetPasswordService, PasswordEncoder passwordEncoder) {
+        this.getModelAndView = getModelAndView;
+        this.forgetPasswordService = forgetPasswordService;
+    }
 
     @GetMapping("/pay-forget-password")
     public ModelAndView getForgotPassword() {

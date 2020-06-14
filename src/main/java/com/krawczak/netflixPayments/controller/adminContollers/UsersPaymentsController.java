@@ -1,13 +1,11 @@
 package com.krawczak.netflixPayments.controller.adminContollers;
 
-import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.email.MailService;
 import com.krawczak.netflixPayments.service.GetModelAndView;
 import com.krawczak.netflixPayments.service.PaymentService;
 import com.krawczak.netflixPayments.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,19 +22,22 @@ import java.util.Map;
 @Controller
 public class UsersPaymentsController {
 
-    @Autowired
-    GetModelAndView getModelAndView;
+    private final GetModelAndView getModelAndView;
 
-    @Autowired
-    PaymentService paymentService;
+    private final PaymentService paymentService;
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    MailService mailService;
+    private final MailService mailService;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    public UsersPaymentsController(GetModelAndView getModelAndView, PaymentService paymentService, UserService userService, MailService mailService) {
+        this.getModelAndView = getModelAndView;
+        this.paymentService = paymentService;
+        this.userService = userService;
+        this.mailService = mailService;
+    }
 
     @RequestMapping("/pay-users-payments")
     public ModelAndView getUsersPayments(HttpServletRequest request){

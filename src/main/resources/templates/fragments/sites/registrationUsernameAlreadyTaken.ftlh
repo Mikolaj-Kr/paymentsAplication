@@ -1,10 +1,8 @@
 <form id="registrationForm" action="/pay-registration" method="post" class="form-signin">
-  <h3 class="alert-danger">Nazwa użytkownika zajęta, zarejestruj się jeszcze raz</h3>
+  <h3 class="alert-danger">Email jest już zajęty spróbuj jeszce raz</h3>
   <label for="name" class="sr-only">Imię</label>
   <input id="name" name="name" type="text" class="form-control" placeholder="Imie" required autofocus> <br>
   <label for="surname" class="sr-only">Nazwisko</label>
-  <input id="surname" name="surname" type="text" class="form-control" placeholder="Nazwisko" required autofocus> <br>
-  <label for="username" class="sr-only">Nazwa użytkownika</label>
   <label for="email" class="sr-only">email</label>
   <input id="email" name="email" type="text" class="form-control" placeholder="email" required autofocus><br>
   <input id="username" name="username" type="text" class="form-control" placeholder="Nazwa użytkownika" required autofocus><br>

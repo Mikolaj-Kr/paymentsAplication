@@ -11,10 +11,6 @@ public class Authorities {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-//  @Column(name = "authority")
-//  String authority;
-
-
   @ManyToOne
   @JoinColumn(name = "authority")
   Authority authority;

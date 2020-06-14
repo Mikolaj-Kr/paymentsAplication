@@ -30,28 +30,32 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class RegistrationController {
 
-  @Autowired
-  PasswordEncoder passwordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
-  @Autowired
-  UserService userService;
+  private final UserService userService;
 
-  @Autowired
-  AuthoritiesService authoritiesService;
+  private final AuthoritiesService authoritiesService;
 
-  @Autowired
-  GetModelAndView getModelAndView;
+  private final GetModelAndView getModelAndView;
 
-  @Autowired
-  PaymentService paymentService;
+  private final PaymentService paymentService;
 
-  @Autowired
-  MailService mailService;
+  private final MailService mailService;
 
-  @Autowired
-  AuthorityService authorityService;
+  private final AuthorityService authorityService;
 
   Logger logger = LoggerFactory.getLogger(this.getClass());
+
+  @Autowired
+  public RegistrationController(PasswordEncoder passwordEncoder, UserService userService, AuthoritiesService authoritiesService, GetModelAndView getModelAndView, PaymentService paymentService, MailService mailService, AuthorityService authorityService) {
+    this.passwordEncoder = passwordEncoder;
+    this.userService = userService;
+    this.authoritiesService = authoritiesService;
+    this.getModelAndView = getModelAndView;
+    this.paymentService = paymentService;
+    this.mailService = mailService;
+    this.authorityService = authorityService;
+  }
 
 
   @RequestMapping("/pay-registration")
@@ -89,7 +93,7 @@ public class RegistrationController {
     users.setSurname(surname);
     users.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(password));
     users.setUsername(username);
-    users.setEnabled(0);
+    users.setEnabled(1);
     users.setChangePasswordCode(passwordEncoder.bCryptPasswordEncoder().encode(String.valueOf(random.nextLong())));
     authority.setAuthority("USER");
     authorities.setUsers(users);
@@ -118,7 +122,7 @@ public class RegistrationController {
 
     logger.info("User " + username + "Added to DB");
     response.sendRedirect("/pay-registration-success");
-    mailService.sendEmail(username, "Witaj " + username +" Wejdź w link aby aktywować konto    https://paymentmk.herokuapp.com/pay-registration-confirm?username=" + username, "Potwierdzenie rejestracji w serwisie płatności");
+//    mailService.sendEmail(username, "Witaj " + username +" Wejdź w link aby aktywować konto    https://dotpaytest.herokuapp.com/pay-registration-confirm?username=" + username, "Potwierdzenie rejestracji w serwisie płatności");
     return new ResponseEntity<>(name, HttpStatus.OK);
   }
 

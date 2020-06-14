@@ -5,7 +5,6 @@ import com.krawczak.netflixPayments.domain.entity.Authorities;
 import com.krawczak.netflixPayments.domain.entity.Authority;
 import com.krawczak.netflixPayments.domain.entity.Payment;
 import com.krawczak.netflixPayments.domain.entity.Users;
-import com.krawczak.netflixPayments.repositories.AuthorityRepository;
 import com.krawczak.netflixPayments.service.*;
 
 import java.time.LocalDate;
@@ -14,36 +13,36 @@ import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletResponse;
-
 @Controller
 public class CreateAdminUser {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    AuthoritiesService authoritiesService;
+    private final AuthoritiesService authoritiesService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    PaymentService paymentService;
+    private final PaymentService paymentService;
 
-    @Autowired
-    GetModelAndView getModelAndView;
+    private final GetModelAndView getModelAndView;
 
-    @Autowired
-    AuthorityService authorityService;
+    private final AuthorityService authorityService;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public CreateAdminUser(UserService userService, AuthoritiesService authoritiesService, PasswordEncoder passwordEncoder, PaymentService paymentService, GetModelAndView getModelAndView, AuthorityService authorityService) {
+        this.userService = userService;
+        this.authoritiesService = authoritiesService;
+        this.passwordEncoder = passwordEncoder;
+        this.paymentService = paymentService;
+        this.getModelAndView = getModelAndView;
+        this.authorityService = authorityService;
+    }
 
     @RequestMapping("/pay-add-admin")
     public ModelAndView getAdmin() {

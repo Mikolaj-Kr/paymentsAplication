@@ -3,6 +3,8 @@ package com.krawczak.netflixPayments.service;
 import com.krawczak.netflixPayments.domain.dto.UsersDto;
 import com.krawczak.netflixPayments.domain.entity.Users;
 import com.krawczak.netflixPayments.mapper.MapUserToDto;
+import com.krawczak.netflixPayments.repositories.AuthoritiesRepository;
+import com.krawczak.netflixPayments.repositories.PaymentsRepository;
 import com.krawczak.netflixPayments.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,17 +15,21 @@ import java.util.List;
 @Service
 public class UserService {
 
-  @Autowired
-  UserRepository userRepository;
+  private final UserRepository userRepository;
+
+  private final MapUserToDto mapUserToDto;
+
+  private final AuthoritiesRepository authoritiesRepository;
+
+  private final PaymentsRepository paymentsRepository;
 
   @Autowired
-  MapUserToDto mapUserToDto;
-
-  @Autowired
-  AuthoritiesService authoritiesService;
-
-  @Autowired
-  PaymentService paymentService;
+  public UserService(UserRepository userRepository, MapUserToDto mapUserToDto,AuthoritiesRepository authoritiesRepository, PaymentsRepository paymentsRepository) {
+    this.userRepository = userRepository;
+    this.mapUserToDto = mapUserToDto;
+    this.authoritiesRepository = authoritiesRepository;
+    this.paymentsRepository = paymentsRepository;
+  }
 
   public Users findUserByUsername(String username) {
     return userRepository.findUsersByUsername(username);
@@ -46,8 +52,8 @@ public class UserService {
   }
 
   public void deleteUser(String username) {
-    authoritiesService.deleteAuthorities(findUserByUsername(username));
-    paymentService.deleteUserPayments(findUserByUsername(username));
+    authoritiesRepository.delete(authoritiesRepository.findAuthoritiesByUsers(findUserByUsername(username)));
+    paymentsRepository.findPaymentByUsersOrderByDateOfPayment(findUserByUsername(username)).forEach(paymentsRepository::delete);
     userRepository.delete(findUserByUsername(username));
   }
 }
